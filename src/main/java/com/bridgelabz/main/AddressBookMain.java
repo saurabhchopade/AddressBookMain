@@ -2,7 +2,7 @@ package com.bridgelabz.main;
 import java.util.*;
 import com.bridgelabz.helper.Person;
 
-public class AddressBookMain {
+public class AddressBookMain extends Person {
 
     public static void main(String args[]) throws Exception {
         //For Input perpose
@@ -11,7 +11,6 @@ public class AddressBookMain {
         Person obj=new Person();
         int personCount=0;
         int choice=0;
-        int upadteId=0;
 
         while (true)
         {
@@ -28,14 +27,14 @@ public class AddressBookMain {
                 case 1:
                         //inserting new record
                         int playMore=1;
+
                         ///condition to check to continue
                         while(playMore==1)
                         {
                             personCount=obj.personAdd(personCount);
-                            System.out.println("DO You Want To Add More Press (1) To continue");
+                            System.out.println("DO You Want To Add More Press (1)continue | (2)Cancel");
                             playMore=inputint.nextInt();
                         }
-
                         break;
                 case 2:
                         //Displaying all records

@@ -18,41 +18,50 @@ public class Person {
 
     ArrayList<String>[] arr = new ArrayList[addressBookSize];
     //This function Add person To arrayylist
-    public int personAdd(int var) throws  Exception
-    {       int personNumber=var;
+    public int personAdd(int var ) throws  Exception
+    {
+        int personNumber=var;
+        arr[personNumber]=new ArrayList<String>();
+        System.out.println("Enter Name");
+        firstName=inputstr.nextLine();
+        //Duplicates Not allowed
+        for(int i=0;i<personNumber;i++)
+        {
+            if(firstName.equals(arr[i].get(0)))
+            {
+                System.out.println("Duplicates Not Allowed");
+                return personNumber;
+            }
+        }
+        arr[personNumber].add(firstName);
+        //Input Address
+        System.out.println("Enter LastName");
+        lastName=inputstr.nextLine();
+        arr[personNumber].add(lastName);
+        // Adress
+        System.out.println("Enter Address");
+        address=inputstr.nextLine();
+        arr[personNumber].add(address);
+        //City
+        System.out.println("Enter City");
+        city=inputstr.nextLine();
+        arr[personNumber].add(city);
+        //State
+        System.out.println("Enter State");
+        state=inputstr.nextLine();
+        arr[personNumber].add(state);
+        //ZIp
+        System.out.println("Enter ZipCode");
+        zip=inputstr.nextLine();
+        arr[personNumber].add(zip);
+        //Phone Number
+        System.out.println("Enter PhoneNumber");
+        phone=inputstr.nextLine();
+        arr[personNumber].add(phone);
+        //Next person
+        personNumber++;
 
-            arr[personNumber]=new ArrayList<String>();
-            System.out.println("Enter Name");
-            //first name Imput
-            firstName=inputstr.nextLine();
-            arr[personNumber].add(firstName);
-            //Input Address
-            System.out.println("Enter LastName");
-            lastName=inputstr.nextLine();
-            arr[personNumber].add(lastName);
-            // Adress
-            System.out.println("Enter Address");
-            address=inputstr.nextLine();
-            arr[personNumber].add(address);
-            //City
-            System.out.println("Enter City");
-            city=inputstr.nextLine();
-            arr[personNumber].add(city);
-            //State
-            System.out.println("Enter State");
-            state=inputstr.nextLine();
-            arr[personNumber].add(state);
-            //ZIp
-            System.out.println("Enter ZipCode");
-            zip=inputstr.nextLine();
-            arr[personNumber].add(zip);
-            //Phone Number
-            System.out.println("Enter PhoneNumber");
-            phone=inputstr.nextLine();
-            arr[personNumber].add(phone);
-            //Next person
-            personNumber++;
-            return  personNumber;
+        return  personNumber;
     }
 
     //this will Display Entire AdressBook
@@ -75,7 +84,7 @@ public class Person {
         }
         return noOfRecord;
     }
-//this will update all data of person excluding name
+    //this will update all data of person excluding name
    public int updateRecord(int personCount)
     {   String dummyName;
         int count=personCount;
