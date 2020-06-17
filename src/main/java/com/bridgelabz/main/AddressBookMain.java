@@ -11,6 +11,7 @@ public class AddressBookMain {
         Person obj=new Person();
         int personCount=0;
         int choice=0;
+        int upadteId=0;
 
         while (true)
         {
@@ -18,6 +19,7 @@ public class AddressBookMain {
             System.out.println("\n======= Address Book Features===========\n\n");
             System.out.println("1  ADD New Person");
             System.out.println("2  DISPLAY AddressBook Records");
+            System.out.println("3  Edit Existing Data");
             System.out.println("Enter Choice");
             choice=inputint.nextInt();
             switch (choice)
@@ -29,6 +31,11 @@ public class AddressBookMain {
                 case 2:
                         //Displaying all records
                         obj.personDisplay(personCount);
+                        break;
+                case 3:
+                        obj.personDisplay(personCount);
+                       // System.out.println("Enter ");
+                        obj.updateRecord(personCount);
                         break;
                 default:
                     System.out.println("INVALID CHOICE");

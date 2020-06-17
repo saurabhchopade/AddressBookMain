@@ -60,6 +60,7 @@ public class Person {
         //noOfRecords iterate upto inserted Count
         for (int records = 0; records <noOfRecord; records++)
         {
+
             //Display Records in Order of insertion
             System.out.println("Name:  "+arr[records].get(0));
             System.out.println("LastName:  "+arr[records].get(1));
@@ -73,5 +74,53 @@ public class Person {
         }
         return noOfRecord;
     }
+//this will update all data of person excluding name
+   public int updateRecord(int personCount)
+    {   String dummyName;
+        int count=personCount;
+        System.out.println("Enter Person name to Edit Info=");
+        dummyName=inputstr.nextLine();
+        for (int records = 0; records <count; records++)
+        {
+            //Display Records in Order of insertion
+            if(dummyName.equals(arr[records].get(0)))
+            {
+                System.out.println("Record Found");
+                System.out.println("Enter LastName: ");
+                firstName=dummyName;
+                arr[records].set(0,firstName);
 
+                System.out.println("Enter LastName: ");
+                lastName=inputstr.nextLine();
+                arr[records].set(1,lastName);
+
+                System.out.println("Enter Address: ");
+                lastName=inputstr.nextLine();
+                arr[records].set( 2, lastName);
+
+                System.out.println("Enter city: ");
+                lastName=inputstr.nextLine();
+                arr[records].set(3,lastName);
+
+                System.out.println("Enter state: ");
+                lastName=inputstr.nextLine();
+                arr[records].set(4,lastName);
+
+                System.out.println("Enter zip: ");
+                lastName=inputstr.nextLine();
+                arr[records].set(5,lastName);
+
+                System.out.println("Enter Phone: ");
+                lastName=inputstr.nextLine();
+                arr[records].set(6,lastName);
+            }
+            else
+            {   //if Record Not found in Entire List
+                System.out.println("Record Not Found");
+            }
+
+        }
+
+        return  count;
+    }
 }
