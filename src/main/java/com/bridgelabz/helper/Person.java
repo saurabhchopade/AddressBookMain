@@ -151,25 +151,33 @@ public class Person {
         }
         return count-1;
     }
-    //Display As Per Sorted Name
-    public int sortByName(int per)
+
+
+    //This Function USed To all Sorting Techniques
+    public int allSort(int per,int choice)
     {
         int personCount=per;
+        //Here We Are Passing Which Sorting Techniques
+        int sortChoice=choice;
         List<String> sorted= new ArrayList<String>();
+
         for (int in=0;in<personCount;in++)
         {
-            sorted.add(arr[in].get(0));
+            sorted.add(arr[in].get(sortChoice));
         }
+
         //Inbuilt Library To Sort The Collection
         Collections.sort(sorted);
         //Iterator To catch Every Record
         Iterator<String> iterator = sorted.iterator();
-        while (iterator.hasNext()) {
+        while (iterator.hasNext())
+        {
             String s=iterator.next();
+
             //Display All the Records
             for (int records = 0; records <personCount; records++) {
                 //Display Records in Order of insertion
-                if (s.equals(arr[records].get(0))) {
+                if (s.equals(arr[records].get(sortChoice))) {
                     System.out.println("Name:  " + arr[records].get(0));
                     System.out.println("LastName:  " + arr[records].get(1));
                     System.out.println("Address:  " + arr[records].get(2));
@@ -177,6 +185,7 @@ public class Person {
                     System.out.println("State:  " + arr[records].get(4));
                     System.out.println("Zip:  " + arr[records].get(5));
                     System.out.println("Phone:  " + arr[records].get(6));
+                    System.out.println("\n\n");
                 }
             }
         }
