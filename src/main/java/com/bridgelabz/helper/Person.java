@@ -1,8 +1,7 @@
 package com.bridgelabz.helper;
 
 import javax.lang.model.type.NullType;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Person {
     Scanner inputstr=new Scanner(System.in);
@@ -16,7 +15,7 @@ public class Person {
     String zip;
     String phone;
 
-    ArrayList<String>[] arr = new ArrayList[addressBookSize];
+    List<String>[] arr = new ArrayList[addressBookSize];
     //This function Add person To arrayylist
     public int personAdd(int var ) throws  Exception
     {
@@ -66,7 +65,8 @@ public class Person {
 
     //this will Display Entire AdressBook
     public int personDisplay(int noOfRecord) throws Exception
-    {   //each person
+    {
+        //each person
         //noOfRecords iterate upto inserted Count
         for (int records = 0; records <noOfRecord; records++)
         {
@@ -86,7 +86,8 @@ public class Person {
     }
     //this will update all data of person excluding name
    public int updateRecord(int personCount)
-    {   String dummyName;
+    {
+        String dummyName;
         int count=personCount;
         System.out.println("Enter Person name to Edit Info=");
         dummyName=inputstr.nextLine();
@@ -135,7 +136,8 @@ public class Person {
     }
 //This will Delete The Element
     public int deletePerson(int personCount)
-    {   int count=personCount;
+    {
+        int count=personCount;
         String dummyName;
         //Delete By person Name
         System.out.println("Enter Person Name To remove");
@@ -148,5 +150,36 @@ public class Person {
             }
         }
         return count-1;
+    }
+    //Display As Per Sorted Name
+    public int sortByName(int per)
+    {
+        int personCount=per;
+        List<String> sorted= new ArrayList<String>();
+        for (int in=0;in<personCount;in++)
+        {
+            sorted.add(arr[in].get(0));
+        }
+        //Inbuilt Library To Sort The Collection
+        Collections.sort(sorted);
+        //Iterator To catch Every Record
+        Iterator<String> iterator = sorted.iterator();
+        while (iterator.hasNext()) {
+            String s=iterator.next();
+            //Display All the Records
+            for (int records = 0; records <personCount; records++) {
+                //Display Records in Order of insertion
+                if (s.equals(arr[records].get(0))) {
+                    System.out.println("Name:  " + arr[records].get(0));
+                    System.out.println("LastName:  " + arr[records].get(1));
+                    System.out.println("Address:  " + arr[records].get(2));
+                    System.out.println("City:  " + arr[records].get(3));
+                    System.out.println("State:  " + arr[records].get(4));
+                    System.out.println("Zip:  " + arr[records].get(5));
+                    System.out.println("Phone:  " + arr[records].get(6));
+                }
+            }
+        }
+        return personCount;
     }
 }
