@@ -27,7 +27,15 @@ public class AddressBookMain {
             {
                 case 1:
                         //inserting new record
-                        personCount=obj.personAdd(personCount);
+                        int playMore=1;
+                        ///condition to check to continue
+                        while(playMore==1)
+                        {
+                            personCount=obj.personAdd(personCount);
+                            System.out.println("DO You Want To Add More Press (1) To continue");
+                            playMore=inputint.nextInt();
+                        }
+
                         break;
                 case 2:
                         //Displaying all records
