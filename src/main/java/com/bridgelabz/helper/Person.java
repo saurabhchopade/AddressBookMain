@@ -1,5 +1,6 @@
 package com.bridgelabz.helper;
 
+import javax.lang.model.type.NullType;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -60,17 +61,17 @@ public class Person {
         //noOfRecords iterate upto inserted Count
         for (int records = 0; records <noOfRecord; records++)
         {
+                //Display Records in Order of insertion
+                System.out.println("Name:  " + arr[records].get(0));
+                System.out.println("LastName:  " + arr[records].get(1));
+                System.out.println("Address:  " + arr[records].get(2));
+                System.out.println("City:  " + arr[records].get(3));
+                System.out.println("State:  " + arr[records].get(4));
+                System.out.println("Zip:  " + arr[records].get(5));
+                System.out.println("Phone:  " + arr[records].get(6));
+                //Newline
+                System.out.println();
 
-            //Display Records in Order of insertion
-            System.out.println("Name:  "+arr[records].get(0));
-            System.out.println("LastName:  "+arr[records].get(1));
-            System.out.println("Address:  "+arr[records].get(2));
-            System.out.println("City:  "+arr[records].get(3));
-            System.out.println("State:  "+arr[records].get(4));
-            System.out.println("Zip:  "+arr[records].get(5));
-            System.out.println("Phone:  "+arr[records].get(6));
-            //Newline
-            System.out.println();
         }
         return noOfRecord;
     }
@@ -122,5 +123,21 @@ public class Person {
         }
 
         return  count;
+    }
+//This will Delete The Element
+    public int deletePerson(int personCount)
+    {   int count=personCount;
+        String dummyName;
+        //Delete By person Name
+        System.out.println("Enter Person Name To remove");
+        dummyName=inputstr.nextLine();
+
+        for (int records = 0; records <count; records++) {
+            //Display Records in Order of insertion
+            if (dummyName.equals(arr[records].get(0))) {
+                arr[records].clear();
+            }
+        }
+        return count-1;
     }
 }

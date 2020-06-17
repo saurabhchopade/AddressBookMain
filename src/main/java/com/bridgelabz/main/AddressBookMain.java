@@ -20,6 +20,7 @@ public class AddressBookMain {
             System.out.println("1  ADD New Person");
             System.out.println("2  DISPLAY AddressBook Records");
             System.out.println("3  Edit Existing Data");
+            System.out.println("4  Delete Person");
             System.out.println("Enter Choice");
             choice=inputint.nextInt();
             switch (choice)
@@ -37,8 +38,12 @@ public class AddressBookMain {
                        // System.out.println("Enter ");
                         obj.updateRecord(personCount);
                         break;
+                case 4:
+                        personCount=obj.deletePerson(personCount);
+                        break;
                 default:
                     System.out.println("INVALID CHOICE");
+
             }
         }
     }
