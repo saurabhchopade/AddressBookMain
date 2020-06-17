@@ -50,7 +50,32 @@ public class AddressBookMain extends Person {
                         personCount=obj.deletePerson(personCount);
                         break;
                 case 5:
-                        personCount=obj.sortByName(personCount);
+                        //All sorting Techniques Performed By one function
+                        int sortChoice;
+                        System.out.println("===SELECT SORTING TECHNIQUE");
+                        System.out.println("1) By Name");
+                        System.out.println("2) By City");
+                        System.out.println("3) by State");
+                        System.out.println("4) By Zip");
+                        sortChoice=inputint.nextInt();
+                        switch (sortChoice)
+                        {
+                            case 1:
+                                    personCount=obj.allSort(personCount,0);
+                                    break;
+                            case 2:
+                                    personCount=obj.allSort(personCount,3);
+                                    break;
+                            case 3:
+                                    personCount=obj.allSort(personCount,4);
+                                    break;
+                            case 4:
+                                personCount=obj.allSort(personCount,5);
+                                break;
+                            default:
+                                System.out.println("Enter Correct Option");
+                        }
+
                         break;
                 default:
                     System.out.println("INVALID CHOICE");
