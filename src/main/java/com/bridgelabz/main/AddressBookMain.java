@@ -22,6 +22,8 @@ public class AddressBookMain extends Person {
             System.out.println("4  Delete Person");
             System.out.println("5  Sorting Techniques");
             System.out.println("6  Specific City And State Person");
+            System.out.println("7  Search Person in city");
+
             System.out.println("Enter Choice");
             choice=inputint.nextInt();
             switch (choice)
@@ -78,8 +80,13 @@ public class AddressBookMain extends Person {
                         }
                         break;
                 case 6:
+                        //for specific city and state
                         personCount=obj.viewPersonByCityState(personCount);
                         break;
+                case 7:
+                        //serarch citywise
+                         personCount=obj.serchInCity(personCount);
+                    break;
                 default:
                     System.out.println("INVALID CHOICE");
 

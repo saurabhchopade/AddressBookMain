@@ -16,8 +16,11 @@ public class Person {
     String phone;
 
     List<String>[] arr = new ArrayList[addressBookSize];
+    //HAshmaps For Dictionaries
     HashMap<String, String> cityMap = new HashMap<String, String>();
     HashMap<String, String> stateMap = new HashMap<String, String>();
+    HashMap<String, String> search= new HashMap<String, String>();
+
     //This function Add person To arrayylist
     public int personAdd(int var ) throws  Exception
     {
@@ -232,6 +235,49 @@ public class Person {
         });
 
 
+        return personCount;
+    }
+    //search person in city
+    public  int serchInCity(int var)
+    {
+        int personCount=var;
+        String specificCity;
+        String personName;
+
+        System.out.println("Enter CITY To search Person:");
+        specificCity=inputstr.nextLine();
+        System.out.println("Person name");
+        personName=inputstr.nextLine();
+        for (int in = 0; in <personCount; in++) {
+
+            if (specificCity.equals(arr[in].get(3)))
+            {
+                search.put(arr[in].get(3),arr[in].get(0));
+
+            }
+
+        }
+        search.entrySet().forEach(entry -> {
+            String checkName=entry.getValue();
+            if(personName.equals(checkName))
+            {
+                for (int records = 0; records <personCount; records++) {
+                    //Display Records in Order of insertion
+                    if (checkName.equals(arr[records].get(0))) {
+                        System.out.println("\n");
+                        System.out.println("RECORD IS AVAILLABLE IN CITY");
+                        System.out.println("Name:  " + arr[records].get(0));
+                        System.out.println("LastName:  " + arr[records].get(1));
+                        System.out.println("Address:  " + arr[records].get(2));
+                        System.out.println("City:  " + arr[records].get(3));
+                        System.out.println("State:  " + arr[records].get(4));
+                        System.out.println("Zip:  " + arr[records].get(5));
+                        System.out.println("Phone:  " + arr[records].get(6));
+                        System.out.println("\n\n");
+                    }
+                }
+            }
+        });
         return personCount;
     }
 }
