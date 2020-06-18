@@ -20,7 +20,8 @@ public class AddressBookMain extends Person {
             System.out.println("2  DISPLAY AddressBook Records");
             System.out.println("3  Edit Existing Data");
             System.out.println("4  Delete Person");
-            System.out.println("5  Sorting by name");
+            System.out.println("5  Sorting Techniques");
+            System.out.println("6  Specific City And State Person");
             System.out.println("Enter Choice");
             choice=inputint.nextInt();
             switch (choice)
@@ -75,7 +76,9 @@ public class AddressBookMain extends Person {
                             default:
                                 System.out.println("Enter Correct Option");
                         }
-
+                        break;
+                case 6:
+                        personCount=obj.viewPersonByCityState(personCount);
                         break;
                 default:
                     System.out.println("INVALID CHOICE");

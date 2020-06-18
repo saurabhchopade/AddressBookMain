@@ -16,6 +16,8 @@ public class Person {
     String phone;
 
     List<String>[] arr = new ArrayList[addressBookSize];
+    HashMap<String, String> cityMap = new HashMap<String, String>();
+    HashMap<String, String> stateMap = new HashMap<String, String>();
     //This function Add person To arrayylist
     public int personAdd(int var ) throws  Exception
     {
@@ -189,6 +191,47 @@ public class Person {
                 }
             }
         }
+        return personCount;
+    }
+
+    public int viewPersonByCityState(int var) {
+        int personCount=var;
+        String checkCity;
+        String checkState;
+        System.out.println("Enter City");
+        checkCity = inputstr.nextLine();
+        System.out.println("Enter State");
+        checkState = inputstr.nextLine();
+
+        for (int in = 0; in <personCount; in++) {
+
+          if (checkCity.equals(arr[in].get(3))&&checkState.equals(arr[in].get(4)))
+            {
+            cityMap.put(arr[in].get(3),arr[in].get(0));
+            stateMap.put(arr[in].get(4),arr[in].get(0));
+
+            }
+
+        }
+
+        cityMap.entrySet().forEach(entry -> {
+            String checkName=entry.getValue();
+            for (int records = 0; records <personCount; records++) {
+                //Display Records in Order of insertion
+                if (checkName.equals(arr[records].get(0))) {
+                    System.out.println("Name:  " + arr[records].get(0));
+                    System.out.println("LastName:  " + arr[records].get(1));
+                    System.out.println("Address:  " + arr[records].get(2));
+                    System.out.println("City:  " + arr[records].get(3));
+                    System.out.println("State:  " + arr[records].get(4));
+                    System.out.println("Zip:  " + arr[records].get(5));
+                    System.out.println("Phone:  " + arr[records].get(6));
+                    System.out.println("\n\n");
+                }
+            }
+        });
+
+
         return personCount;
     }
 }
