@@ -1,9 +1,10 @@
-package com.bridgelabz.util;
-import  com.bridgelabz.service.AddPersonServiceImpl;
+package com.bridgelabz.addressbookmain.util;
 import java.util.Scanner;
-import com.bridgelabz.model.Person;
+import com.bridgelabz.addressbookmain.model.Person;
 public class Input extends Person{
     private final static Scanner strInput = new Scanner(System.in);
+    private final static Scanner intInput = new Scanner(System.in);
+
     //To give the String Values
     public int checkDuplicate(String firstN)
     {
@@ -21,7 +22,8 @@ public class Input extends Person{
     }
     public static String getStringValue(){
         return strInput.nextLine();
-
-
+    }
+    public static int getIntValue(){
+        return intInput.nextInt();
     }
 }

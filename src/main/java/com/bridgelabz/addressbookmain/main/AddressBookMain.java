@@ -1,14 +1,12 @@
-package com.bridgelabz.main;
+package com.bridgelabz.addressbookmain.main;
 
-import com.bridgelabz.model.Person;
-
-import java.util.Scanner;
+import com.bridgelabz.addressbookmain.model.Person;
+import com.bridgelabz.addressbookmain.util.Input;
 
 public class AddressBookMain extends Person {
 
     public static void main(String args[]) throws Exception {
         //For Input perpose
-        Scanner inputint = new Scanner(System.in);
         //Created Person Object To call Helper Functions
         Person obj = new Person();
         int personCount = 0;
@@ -27,7 +25,7 @@ public class AddressBookMain extends Person {
             System.out.println("7  Search Person in city");
 
             System.out.println("Enter Choice");
-            choice=inputint.nextInt();
+            choice = Input.getIntValue();
             switch (choice)
             {
                 case 1:
@@ -39,7 +37,7 @@ public class AddressBookMain extends Person {
                         {
                             personCount=obj.personAdd(personCount);
                             System.out.println("DO You Want To Add More Press (1)continue | (2)Cancel");
-                            playMore=inputint.nextInt();
+                            playMore = Input.getIntValue();
                         }
                         break;
                 case 2:
@@ -61,8 +59,8 @@ public class AddressBookMain extends Person {
                         System.out.println("1) By Name");
                         System.out.println("2) By City");
                         System.out.println("3) by State");
-                        System.out.println("4) By Zip");
-                        sortChoice=inputint.nextInt();
+                    System.out.println("4) By Zip");
+                    sortChoice = Input.getIntValue();
                         switch (sortChoice)
                         {
                             case 1:

@@ -1,4 +1,4 @@
-package com.bridgelabz.model;
+package com.bridgelabz.addressbookmain.model;
 
 public class PersonInformation {
     public static String   firstName, lastName ,address,city,state,zip,phone;

@@ -1,21 +1,13 @@
-package com.bridgelabz.model;
+package com.bridgelabz.addressbookmain.model;
 
-import com.bridgelabz.service.AddPersonServiceImpl;
-import com.bridgelabz.util.Input;
-import com.bridgelabz.model.PersonInformation;
+import com.bridgelabz.addressbookmain.service.AddPersonServiceImpl;
+import com.bridgelabz.addressbookmain.util.Input;
+
 import java.util.*;
 
 public class Person {
-    Scanner inputstr=new Scanner(System.in);
     //Variables Of AddressBook
     int addressBookSize=100;
-//    String firstName;
-//    String lastName;
-//    String address;
-//    String city;
-//    String state;
-//    String zip;
-//    String phone;
   public  static  int pr;
     final AddPersonServiceImpl calladdperson=new AddPersonServiceImpl();
    public List<String>[] arr = new ArrayList[addressBookSize];
@@ -70,7 +62,7 @@ public class Person {
         String dummyName;
         int count=personCount;
         System.out.println("Enter Person name to Edit Info=");
-        dummyName=inputstr.nextLine();
+        dummyName = Input.getStringValue();
         for (int records = 0; records <count; records++)
         {
             //Display Records in Order of insertion
@@ -121,7 +113,7 @@ public class Person {
         String dummyName;
         //Delete By person Name
         System.out.println("Enter Person Name To remove");
-        dummyName=inputstr.nextLine();
+        dummyName = Input.getStringValue();
 
         for (int records = 0; records <count; records++) {
             //Display Records in Order of insertion
@@ -180,9 +172,9 @@ public class Person {
         String checkCity;
         String checkState;
         System.out.println("Enter City");
-        checkCity = inputstr.nextLine();
+        checkCity = Input.getStringValue();
         System.out.println("Enter State");
-        checkState = inputstr.nextLine();
+        checkState = Input.getStringValue();
 
         for (int in = 0; in <personCount; in++) {
 
@@ -190,9 +182,7 @@ public class Person {
             {
             cityMap.put(arr[in].get(3),arr[in].get(0));
             stateMap.put(arr[in].get(4),arr[in].get(0));
-
             }
-
         }
 
         cityMap.entrySet().forEach(entry -> {
@@ -221,9 +211,9 @@ public class Person {
         String personName;
 
         System.out.println("Enter CITY To search Person:");
-        specificCity=inputstr.nextLine();
+        specificCity = Input.getStringValue();
         System.out.println("Person name");
-        personName=inputstr.nextLine();
+        personName = Input.getStringValue();
         for (int in = 0; in <personCount; in++) {
 
             if (specificCity.equals(arr[in].get(3)))

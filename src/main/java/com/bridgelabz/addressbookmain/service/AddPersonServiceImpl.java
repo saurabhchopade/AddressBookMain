@@ -1,7 +1,7 @@
-package com.bridgelabz.service;
+package com.bridgelabz.addressbookmain.service;
 
-import com.bridgelabz.model.PersonInformation;
-import com.bridgelabz.util.Input;
+import com.bridgelabz.addressbookmain.model.PersonInformation;
+import com.bridgelabz.addressbookmain.util.Input;
 public class AddPersonServiceImpl implements AddPersonService {
     public static String firstName, lastName, address, city, state, zip, phone;
 
@@ -45,8 +45,8 @@ public class AddPersonServiceImpl implements AddPersonService {
                         break;
                     }
                 }
-                case 4: {
 
+                case 4: {
                     System.out.println("Enter City");
                     city = Input.getStringValue();
                     if (city.matches("^[A-Z]{1}[a-z]{2,}$")) {
@@ -58,8 +58,8 @@ public class AddPersonServiceImpl implements AddPersonService {
                     }
 
                 }
-                case 5: {
 
+                case 5: {
                     System.out.println("Enter State");
                     state = Input.getStringValue();
                     if (state.matches("^[A-Z]{1}[a-z]{2,}$")) {
