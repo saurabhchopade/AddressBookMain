@@ -1,5 +1,8 @@
 package com.bridgelabz.model;
 
+import com.bridgelabz.service.AddPersonServiceImpl;
+import com.bridgelabz.util.Input;
+import com.bridgelabz.model.PersonInformation;
 import java.util.*;
 
 public class Person {
@@ -13,8 +16,9 @@ public class Person {
     String state;
     String zip;
     String phone;
-
-    List<String>[] arr = new ArrayList[addressBookSize];
+    public static int pr;
+    final AddPersonServiceImpl calladdperson=new AddPersonServiceImpl();
+   public List<String>[] arr = new ArrayList[addressBookSize];
     //HAshmaps For Dictionaries to sort as per user requirement
     HashMap<String, String> cityMap = new HashMap<String, String>();
     HashMap<String, String> stateMap = new HashMap<String, String>();
@@ -24,46 +28,18 @@ public class Person {
     public int personAdd(int var ) throws  Exception
     {
         int personNumber=var;
+        pr=var;
         arr[personNumber]=new ArrayList<String>();
-        System.out.println("Enter Name");
-        firstName=inputstr.nextLine();
-        //Duplicates Not allowed
-        for(int i=0;i<personNumber;i++)
-        {
-            if(firstName.equals(arr[i].get(0)))
-            {
-                System.out.println("Duplicates Not Allowed");
-                return personNumber;
-            }
-        }
-        arr[personNumber].add(firstName);
-        //Input Address
-        System.out.println("Enter LastName");
-        lastName=inputstr.nextLine();
-        arr[personNumber].add(lastName);
-        // Adress
-        System.out.println("Enter Address");
-        address=inputstr.nextLine();
-        arr[personNumber].add(address);
-        //City
-        System.out.println("Enter City");
-        city=inputstr.nextLine();
-        arr[personNumber].add(city);
-        //State
-        System.out.println("Enter State");
-        state=inputstr.nextLine();
-        arr[personNumber].add(state);
-        //ZIp
-        System.out.println("Enter ZipCode");
-        zip=inputstr.nextLine();
-        arr[personNumber].add(zip);
-        //Phone Number
-        System.out.println("Enter PhoneNumber");
-        phone=inputstr.nextLine();
-        arr[personNumber].add(phone);
+        calladdperson.addPerson();
+        arr[personNumber].add(PersonInformation.firstName);
+        arr[personNumber].add(PersonInformation.lastName);
+        arr[personNumber].add(PersonInformation.address);
+        arr[personNumber].add(PersonInformation.city);
+        arr[personNumber].add(PersonInformation.state);
+        arr[personNumber].add(PersonInformation.zip);
+        arr[personNumber].add(PersonInformation.phone);
         //Next person
         personNumber++;
-
         return  personNumber;
     }
 
