@@ -9,14 +9,14 @@ public class Person {
     Scanner inputstr=new Scanner(System.in);
     //Variables Of AddressBook
     int addressBookSize=100;
-    String firstName;
-    String lastName;
-    String address;
-    String city;
-    String state;
-    String zip;
-    String phone;
-    public static int pr;
+//    String firstName;
+//    String lastName;
+//    String address;
+//    String city;
+//    String state;
+//    String zip;
+//    String phone;
+  public  static  int pr;
     final AddPersonServiceImpl calladdperson=new AddPersonServiceImpl();
    public List<String>[] arr = new ArrayList[addressBookSize];
     //HAshmaps For Dictionaries to sort as per user requirement
@@ -78,32 +78,32 @@ public class Person {
             {
                 System.out.println("Record Found");
                 System.out.println("Enter LastName: ");
-                firstName=dummyName;
+                String firstName=dummyName;
                 arr[records].set(0,firstName);
 
                 System.out.println("Enter LastName: ");
-                lastName=inputstr.nextLine();
+                String lastName=Input.getStringValue();
                 arr[records].set(1,lastName);
 
                 System.out.println("Enter Address: ");
-                lastName=inputstr.nextLine();
-                arr[records].set( 2, lastName);
+                String address=Input.getStringValue();
+                arr[records].set( 2, address);
 
                 System.out.println("Enter city: ");
-                lastName=inputstr.nextLine();
-                arr[records].set(3,lastName);
+                String city=Input.getStringValue();
+                arr[records].set(3,city);
 
                 System.out.println("Enter state: ");
-                lastName=inputstr.nextLine();
-                arr[records].set(4,lastName);
+                String state=Input.getStringValue();
+                arr[records].set(4,state);
 
                 System.out.println("Enter zip: ");
-                lastName=inputstr.nextLine();
-                arr[records].set(5,lastName);
+                String zip=Input.getStringValue();
+                arr[records].set(5,zip);
 
                 System.out.println("Enter Phone: ");
-                lastName=inputstr.nextLine();
-                arr[records].set(6,lastName);
+                String phone=Input.getStringValue();
+                arr[records].set(6,phone);
             }
             else
             {   //if Record Not found in Entire List
