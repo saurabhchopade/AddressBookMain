@@ -1,6 +1,5 @@
-package com.bridgelabz.helper;
+package com.bridgelabz.model;
 
-import javax.lang.model.type.NullType;
 import java.util.*;
 
 public class Person {
@@ -16,7 +15,7 @@ public class Person {
     String phone;
 
     List<String>[] arr = new ArrayList[addressBookSize];
-    //HAshmaps For Dictionaries
+    //HAshmaps For Dictionaries to sort as per user requirement
     HashMap<String, String> cityMap = new HashMap<String, String>();
     HashMap<String, String> stateMap = new HashMap<String, String>();
     HashMap<String, String> search= new HashMap<String, String>();
@@ -142,7 +141,7 @@ public class Person {
 //This will Delete The Element
     public int deletePerson(int personCount)
     {
-        int count=personCount;
+        int count = personCount;
         String dummyName;
         //Delete By person Name
         System.out.println("Enter Person Name To remove");
@@ -154,20 +153,24 @@ public class Person {
                 arr[records].clear();
             }
         }
-        return count-1;
+        return count - 1;
     }
 
 
     //This Function USed To all Sorting Techniques
-    public int allSort(int per,int choice)
-    {
-        int personCount=per;
-        //Here We Are Passing Which Sorting Techniques
-        int sortChoice=choice;
-        List<String> sorted= new ArrayList<String>();
 
-        for (int in=0;in<personCount;in++)
-        {
+    /**
+     * @param per
+     * @param choice
+     * @return
+     */
+    public int allSort(int per, int choice) {
+        int personCount = per;
+        //Here We Are Passing Which Sorting Techniques
+        int sortChoice = choice;
+        List<String> sorted = new ArrayList<String>();
+
+        for (int in = 0; in < personCount; in++) {
             sorted.add(arr[in].get(sortChoice));
         }
 
@@ -175,8 +178,7 @@ public class Person {
         Collections.sort(sorted);
         //Iterator To catch Every Record
         Iterator<String> iterator = sorted.iterator();
-        while (iterator.hasNext())
-        {
+        while (iterator.hasNext()) {
             String s=iterator.next();
 
             //Display All the Records
@@ -233,8 +235,6 @@ public class Person {
                 }
             }
         });
-
-
         return personCount;
     }
     //search person in city
@@ -253,9 +253,7 @@ public class Person {
             if (specificCity.equals(arr[in].get(3)))
             {
                 search.put(arr[in].get(3),arr[in].get(0));
-
             }
-
         }
         search.entrySet().forEach(entry -> {
             String checkName=entry.getValue();

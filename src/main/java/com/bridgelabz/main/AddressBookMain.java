@@ -1,16 +1,18 @@
 package com.bridgelabz.main;
-import java.util.*;
-import com.bridgelabz.helper.Person;
+
+import com.bridgelabz.model.Person;
+
+import java.util.Scanner;
 
 public class AddressBookMain extends Person {
 
     public static void main(String args[]) throws Exception {
         //For Input perpose
-        Scanner inputint=new Scanner(System.in);
+        Scanner inputint = new Scanner(System.in);
         //Created Person Object To call Helper Functions
-        Person obj=new Person();
-        int personCount=0;
-        int choice=0;
+        Person obj = new Person();
+        int personCount = 0;
+        int choice = 0;
 
         while (true)
         {
