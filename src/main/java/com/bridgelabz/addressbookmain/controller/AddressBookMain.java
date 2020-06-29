@@ -1,20 +1,18 @@
-package com.bridgelabz.main;
-import java.util.*;
-import com.bridgelabz.helper.Person;
+package com.bridgelabz.addressbookmain.controller;
+
+import com.bridgelabz.addressbookmain.model.Person;
+import com.bridgelabz.addressbookmain.util.Input;
 
 public class AddressBookMain extends Person {
 
     public static void main(String args[]) throws Exception {
-        //For Input perpose
-        Scanner inputint=new Scanner(System.in);
         //Created Person Object To call Helper Functions
-        Person obj=new Person();
-        int personCount=0;
-        int choice=0;
+        Person callFeature = new Person();
+        int personCount = 0;
+        int choice = 0;
 
         while (true)
         {
-            //For Display Perpose
             System.out.println("\n======= Address Book Features===========\n\n");
             System.out.println("1  ADD New Person");
             System.out.println("2  DISPLAY AddressBook Records");
@@ -25,32 +23,31 @@ public class AddressBookMain extends Person {
             System.out.println("7  Search Person in city");
 
             System.out.println("Enter Choice");
-            choice=inputint.nextInt();
+            choice = Input.getIntValue();
             switch (choice)
             {
                 case 1:
                         //inserting new record
-                        int playMore=1;
-
+                        int playMore = 1;
                         ///condition to check to continue
                         while(playMore==1)
                         {
-                            personCount=obj.personAdd(personCount);
+                            personCount = callFeature.personAdd(personCount);
                             System.out.println("DO You Want To Add More Press (1)continue | (2)Cancel");
-                            playMore=inputint.nextInt();
+                            playMore = Input.getIntValue();
                         }
                         break;
                 case 2:
                         //Displaying all records
-                        obj.personDisplay(personCount);
+                    callFeature.personDisplay(personCount);
                         break;
                 case 3:
-                        obj.personDisplay(personCount);
+                    callFeature.personDisplay(personCount);
                        // System.out.println("Enter ");
-                        obj.updateRecord(personCount);
+                    callFeature.updateRecord(personCount);
                         break;
                 case 4:
-                        personCount=obj.deletePerson(personCount);
+                    personCount = callFeature.deletePerson(personCount);
                         break;
                 case 5:
                         //All sorting Techniques Performed By one function
@@ -59,21 +56,21 @@ public class AddressBookMain extends Person {
                         System.out.println("1) By Name");
                         System.out.println("2) By City");
                         System.out.println("3) by State");
-                        System.out.println("4) By Zip");
-                        sortChoice=inputint.nextInt();
+                    System.out.println("4) By Zip");
+                    sortChoice = Input.getIntValue();
                         switch (sortChoice)
                         {
                             case 1:
-                                    personCount=obj.allSort(personCount,0);
+                                personCount = callFeature.allSort(personCount, 0);
                                     break;
                             case 2:
-                                    personCount=obj.allSort(personCount,3);
+                                personCount = callFeature.allSort(personCount, 3);
                                     break;
                             case 3:
-                                    personCount=obj.allSort(personCount,4);
+                                personCount = callFeature.allSort(personCount, 4);
                                     break;
                             case 4:
-                                personCount=obj.allSort(personCount,5);
+                                personCount = callFeature.allSort(personCount, 5);
                                 break;
                             default:
                                 System.out.println("Enter Correct Option");
@@ -81,11 +78,11 @@ public class AddressBookMain extends Person {
                         break;
                 case 6:
                         //for specific city and state
-                        personCount=obj.viewPersonByCityState(personCount);
+                    personCount = callFeature.viewPersonByCityState(personCount);
                         break;
                 case 7:
-                        //serarch citywise
-                         personCount=obj.serchInCity(personCount);
+                        //search According to city
+                    personCount = callFeature.serchInCity(personCount);
                     break;
                 default:
                     System.out.println("INVALID CHOICE");
