@@ -1,7 +1,7 @@
 package com.bridgelabz.addressbookmain.service;
 
 interface  AddPersonService {
-    void addPerson();
+    void addPerson(int personCounter);
 
 
 }

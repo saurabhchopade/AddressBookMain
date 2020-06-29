@@ -1,133 +1,135 @@
 package com.bridgelabz.addressbookmain.model;
-
 import com.bridgelabz.addressbookmain.service.AddPersonServiceImpl;
 import com.bridgelabz.addressbookmain.util.Input;
-
 import java.util.*;
 
 public class Person {
     //Variables Of AddressBook
-    int addressBookSize=100;
-  public  static  int pr;
-    final AddPersonServiceImpl calladdperson=new AddPersonServiceImpl();
-   public List<String>[] arr = new ArrayList[addressBookSize];
-    //HAshmaps For Dictionaries to sort as per user requirement
-    HashMap<String, String> cityMap = new HashMap<String, String>();
-    HashMap<String, String> stateMap = new HashMap<String, String>();
-    HashMap<String, String> search= new HashMap<String, String>();
+    public static int addressBookSize = 100;
+    public static int personTotalCount;
+    final AddPersonServiceImpl personImpl = new AddPersonServiceImpl();
+    public static List<String>[] dataStorage = new ArrayList[addressBookSize];
+    //Hashmaps For Dictionaries to sort as per user requirement
+    HashMap<String, String> dummyDataStorage = new HashMap<>();
+    HashMap<String, String> stateMap = new HashMap<>();
+    HashMap<String, String> search = new HashMap<>();
 
-    //This function Add person To arrayylist
-    public int personAdd(int var ) throws  Exception
-    {
-        int personNumber=var;
-        pr=var;
-        arr[personNumber]=new ArrayList<String>();
-        calladdperson.addPerson();
-        arr[personNumber].add(PersonInformation.firstName);
-        arr[personNumber].add(PersonInformation.lastName);
-        arr[personNumber].add(PersonInformation.address);
-        arr[personNumber].add(PersonInformation.city);
-        arr[personNumber].add(PersonInformation.state);
-        arr[personNumber].add(PersonInformation.zip);
-        arr[personNumber].add(PersonInformation.phone);
-        //Next person
+    /**
+     * This function Add person To arraylist
+     *
+     * @param personNum
+     * @return
+     * @throws Exception
+     */
+    public int personAdd(int personNum) throws Exception {
+        int personNumber = personNum;
+        personTotalCount = personNum;
+        dataStorage[personNumber] = new ArrayList<String>();
+        personImpl.addPerson(personNumber);
         personNumber++;
-        return  personNumber;
+        return personNumber;
     }
 
-    //this will Display Entire AdressBook
-    public int personDisplay(int noOfRecord) throws Exception
-    {
+    /**
+     * this will Display Entire AddressBook
+     *
+     * @param noOfRecord
+     * @return
+     * @throws Exception
+     */
+    public int personDisplay(int noOfRecord) throws Exception {
         //each person
         //noOfRecords iterate upto inserted Count
-        for (int records = 0; records <noOfRecord; records++)
-        {
-                //Display Records in Order of insertion
-                System.out.println("Name:  " + arr[records].get(0));
-                System.out.println("LastName:  " + arr[records].get(1));
-                System.out.println("Address:  " + arr[records].get(2));
-                System.out.println("City:  " + arr[records].get(3));
-                System.out.println("State:  " + arr[records].get(4));
-                System.out.println("Zip:  " + arr[records].get(5));
-                System.out.println("Phone:  " + arr[records].get(6));
-                //Newline
-                System.out.println();
-
+        for (int records = 0; records < noOfRecord; records++) {
+            //Display Records in Order of insertion
+            System.out.println("Name:  " + dataStorage[records].get(0));
+            System.out.println("LastName:  " + dataStorage[records].get(1));
+            System.out.println("Address:  " + dataStorage[records].get(2));
+            System.out.println("City:  " + dataStorage[records].get(3));
+            System.out.println("State:  " + dataStorage[records].get(4));
+            System.out.println("Zip:  " + dataStorage[records].get(5));
+            System.out.println("Phone:  " + dataStorage[records].get(6));
+            //Newline
+            System.out.println();
         }
         return noOfRecord;
     }
-    //this will update all data of person excluding name
-   public int updateRecord(int personCount)
-    {
+
+    /**
+     * this will update all data of person excluding name
+     *
+     * @param personCount
+     * @return
+     */
+    public int updateRecord(int personCount) {
         String dummyName;
-        int count=personCount;
+        int count = personCount;
         System.out.println("Enter Person name to Edit Info=");
         dummyName = Input.getStringValue();
-        for (int records = 0; records <count; records++)
-        {
+        for (int records = 0; records < count; records++) {
             //Display Records in Order of insertion
-            if(dummyName.equals(arr[records].get(0)))
-            {
+            if (dummyName.equals(dataStorage[records].get(0))) {
                 System.out.println("Record Found");
                 System.out.println("Enter LastName: ");
-                String firstName=dummyName;
-                arr[records].set(0,firstName);
+                String firstName = dummyName;
+                dataStorage[records].set(0, firstName);
 
                 System.out.println("Enter LastName: ");
-                String lastName=Input.getStringValue();
-                arr[records].set(1,lastName);
+                String lastName = Input.getStringValue();
+                dataStorage[records].set(1, lastName);
 
                 System.out.println("Enter Address: ");
                 String address=Input.getStringValue();
-                arr[records].set( 2, address);
+                dataStorage[records].set( 2, address);
 
                 System.out.println("Enter city: ");
                 String city=Input.getStringValue();
-                arr[records].set(3,city);
+                dataStorage[records].set(3,city);
 
                 System.out.println("Enter state: ");
                 String state=Input.getStringValue();
-                arr[records].set(4,state);
+                dataStorage[records].set(4,state);
 
                 System.out.println("Enter zip: ");
                 String zip=Input.getStringValue();
-                arr[records].set(5,zip);
+                dataStorage[records].set(5,zip);
 
                 System.out.println("Enter Phone: ");
                 String phone=Input.getStringValue();
-                arr[records].set(6,phone);
-            }
-            else
-            {   //if Record Not found in Entire List
+                dataStorage[records].set(6, phone);
+            } else {   //if Record Not found in Entire List
                 System.out.println("Record Not Found");
             }
 
         }
 
-        return  count;
+        return count;
     }
-//This will Delete The Element
-    public int deletePerson(int personCount)
-    {
+
+    /**
+     * This will Delete The Element
+     *
+     * @param personCount
+     * @return
+     */
+    public int deletePerson(int personCount) {
         int count = personCount;
         String dummyName;
         //Delete By person Name
         System.out.println("Enter Person Name To remove");
         dummyName = Input.getStringValue();
 
-        for (int records = 0; records <count; records++) {
+        for (int records = 0; records < count; records++) {
             //Display Records in Order of insertion
-            if (dummyName.equals(arr[records].get(0))) {
-                arr[records].clear();
+            if (dummyName.equals(dataStorage[records].get(0))) {
+                dataStorage[records].clear();
             }
         }
         return count - 1;
     }
 
-
-    //This Function USed To all Sorting Techniques
-
     /**
+     * This Function USed To all Sorting Techniques
      * @param per
      * @param choice
      * @return
@@ -138,28 +140,27 @@ public class Person {
         int sortChoice = choice;
         List<String> sorted = new ArrayList<String>();
 
-        for (int in = 0; in < personCount; in++) {
-            sorted.add(arr[in].get(sortChoice));
+        for (int record = 0; record < personCount; record++) {
+            sorted.add(dataStorage[record].get(sortChoice));
         }
-
         //Inbuilt Library To Sort The Collection
         Collections.sort(sorted);
         //Iterator To catch Every Record
         Iterator<String> iterator = sorted.iterator();
         while (iterator.hasNext()) {
-            String s=iterator.next();
+            String s = iterator.next();
 
             //Display All the Records
-            for (int records = 0; records <personCount; records++) {
+            for (int records = 0; records < personCount; records++) {
                 //Display Records in Order of insertion
-                if (s.equals(arr[records].get(sortChoice))) {
-                    System.out.println("Name:  " + arr[records].get(0));
-                    System.out.println("LastName:  " + arr[records].get(1));
-                    System.out.println("Address:  " + arr[records].get(2));
-                    System.out.println("City:  " + arr[records].get(3));
-                    System.out.println("State:  " + arr[records].get(4));
-                    System.out.println("Zip:  " + arr[records].get(5));
-                    System.out.println("Phone:  " + arr[records].get(6));
+                if (s.equals(dataStorage[records].get(sortChoice))) {
+                    System.out.println("Name:  " + dataStorage[records].get(0));
+                    System.out.println("LastName:  " + dataStorage[records].get(1));
+                    System.out.println("Address:  " + dataStorage[records].get(2));
+                    System.out.println("City:  " + dataStorage[records].get(3));
+                    System.out.println("State:  " + dataStorage[records].get(4));
+                    System.out.println("Zip:  " + dataStorage[records].get(5));
+                    System.out.println("Phone:  " + dataStorage[records].get(6));
                     System.out.println("\n\n");
                 }
             }
@@ -167,8 +168,14 @@ public class Person {
         return personCount;
     }
 
+    /**
+     * View Person By city and State
+     *
+     * @param var
+     * @return
+     */
     public int viewPersonByCityState(int var) {
-        int personCount=var;
+        int personCount = var;
         String checkCity;
         String checkState;
         System.out.println("Enter City");
@@ -176,37 +183,41 @@ public class Person {
         System.out.println("Enter State");
         checkState = Input.getStringValue();
 
-        for (int in = 0; in <personCount; in++) {
+        for (int in = 0; in < personCount; in++) {
 
-          if (checkCity.equals(arr[in].get(3))&&checkState.equals(arr[in].get(4)))
-            {
-            cityMap.put(arr[in].get(3),arr[in].get(0));
-            stateMap.put(arr[in].get(4),arr[in].get(0));
+            if (checkCity.equals(dataStorage[in].get(3)) && checkState.equals(dataStorage[in].get(4))) {
+                dummyDataStorage.put(dataStorage[in].get(3), dataStorage[in].get(0));
+                stateMap.put(dataStorage[in].get(4), dataStorage[in].get(0));
             }
         }
 
-        cityMap.entrySet().forEach(entry -> {
-            String checkName=entry.getValue();
-            for (int records = 0; records <personCount; records++) {
+        dummyDataStorage.entrySet().forEach(entry -> {
+            String checkName = entry.getValue();
+            for (int records = 0; records < personCount; records++) {
                 //Display Records in Order of insertion
-                if (checkName.equals(arr[records].get(0))) {
-                    System.out.println("Name:  " + arr[records].get(0));
-                    System.out.println("LastName:  " + arr[records].get(1));
-                    System.out.println("Address:  " + arr[records].get(2));
-                    System.out.println("City:  " + arr[records].get(3));
-                    System.out.println("State:  " + arr[records].get(4));
-                    System.out.println("Zip:  " + arr[records].get(5));
-                    System.out.println("Phone:  " + arr[records].get(6));
+                if (checkName.equals(dataStorage[records].get(0))) {
+                    System.out.println("Name:  " + dataStorage[records].get(0));
+                    System.out.println("LastName:  " + dataStorage[records].get(1));
+                    System.out.println("Address:  " + dataStorage[records].get(2));
+                    System.out.println("City:  " + dataStorage[records].get(3));
+                    System.out.println("State:  " + dataStorage[records].get(4));
+                    System.out.println("Zip:  " + dataStorage[records].get(5));
+                    System.out.println("Phone:  " + dataStorage[records].get(6));
                     System.out.println("\n\n");
                 }
             }
         });
         return personCount;
     }
-    //search person in city
-    public  int serchInCity(int var)
-    {
-        int personCount=var;
+
+    /**
+     * search person in city
+     *
+     * @param dummyCount
+     * @return
+     */
+    public int serchInCity(int dummyCount) {
+        int personCount = dummyCount;
         String specificCity;
         String personName;
 
@@ -214,11 +225,10 @@ public class Person {
         specificCity = Input.getStringValue();
         System.out.println("Person name");
         personName = Input.getStringValue();
-        for (int in = 0; in <personCount; in++) {
+        for (int recordNum = 0; recordNum < personCount; recordNum++) {
 
-            if (specificCity.equals(arr[in].get(3)))
-            {
-                search.put(arr[in].get(3),arr[in].get(0));
+            if (specificCity.equals(dataStorage[recordNum].get(3))) {
+                search.put(dataStorage[recordNum].get(3), dataStorage[recordNum].get(0));
             }
         }
         search.entrySet().forEach(entry -> {
@@ -227,16 +237,16 @@ public class Person {
             {
                 for (int records = 0; records <personCount; records++) {
                     //Display Records in Order of insertion
-                    if (checkName.equals(arr[records].get(0))) {
+                    if (checkName.equals(dataStorage[records].get(0))) {
                         System.out.println("\n");
-                        System.out.println("RECORD IS AVAILLABLE IN CITY");
-                        System.out.println("Name:  " + arr[records].get(0));
-                        System.out.println("LastName:  " + arr[records].get(1));
-                        System.out.println("Address:  " + arr[records].get(2));
-                        System.out.println("City:  " + arr[records].get(3));
-                        System.out.println("State:  " + arr[records].get(4));
-                        System.out.println("Zip:  " + arr[records].get(5));
-                        System.out.println("Phone:  " + arr[records].get(6));
+                        System.out.println("RECORDS IN CITY");
+                        System.out.println("Name:  " + dataStorage[records].get(0));
+                        System.out.println("LastName:  " + dataStorage[records].get(1));
+                        System.out.println("Address:  " + dataStorage[records].get(2));
+                        System.out.println("City:  " + dataStorage[records].get(3));
+                        System.out.println("State:  " + dataStorage[records].get(4));
+                        System.out.println("Zip:  " + dataStorage[records].get(5));
+                        System.out.println("Phone:  " + dataStorage[records].get(6));
                         System.out.println("\n\n");
                     }
                 }
