@@ -1,11 +1,15 @@
 package com.bridgelabz.addressbookmain.service;
 
+import com.bridgelabz.addressbookmain.model.Person;
 import com.bridgelabz.addressbookmain.util.Input;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.stream.IntStream;
 
-public class PersonOperation {
+public class PersonOperation extends Person {
     public static int addressBookSize = 100;
     public static int personTotalCount;
     final AddPersonServiceImpl addPersonService = new AddPersonServiceImpl();
@@ -65,37 +69,30 @@ public class PersonOperation {
             if (dummyName.equals(arrayLists[records].get(0))) {
                 System.out.println("Record Found");
                 System.out.println("Enter LastName: ");
-                String firstName = dummyName;
+                firstName = dummyName;
                 arrayLists[records].set(0, firstName);
-
                 System.out.println("Enter LastName: ");
-                String lastName = Input.getStringValue();
+                lastName = Input.getStringValue();
                 arrayLists[records].set(1, lastName);
-
                 System.out.println("Enter Address: ");
-                String address = Input.getStringValue();
+                address = Input.getStringValue();
                 arrayLists[records].set(2, address);
-
                 System.out.println("Enter city: ");
-                String city = Input.getStringValue();
+                city = Input.getStringValue();
                 arrayLists[records].set(3, city);
-
                 System.out.println("Enter state: ");
-                String state = Input.getStringValue();
+                state = Input.getStringValue();
                 arrayLists[records].set(4, state);
-
                 System.out.println("Enter zip: ");
-                String zip = Input.getStringValue();
+                zip = Input.getStringValue();
                 arrayLists[records].set(5, zip);
-
                 System.out.println("Enter Phone: ");
-                String phone = Input.getStringValue();
+                phone = Input.getStringValue();
                 arrayLists[records].set(6, phone);
             } else {
                 System.out.println("Record Not Found");
             }
         });
-
         return count;
     }
 
@@ -172,8 +169,7 @@ public class PersonOperation {
     }
 
     /**
-     * search person in city
-     *
+     *  search person in city
      * @param dummyCount
      * @return
      */
@@ -186,8 +182,7 @@ public class PersonOperation {
         System.out.println("Person name");
         personName = Input.getStringValue();
         IntStream.range(0, personCount).filter(recordNum -> specificCity.equals(arrayLists[recordNum].get(3))).forEach(recordNum -> searchMap.put(arrayLists[recordNum].get(3), arrayLists[recordNum].get(0)));
-        searchMap.entrySet().forEach(entry -> {
-            String checkName = entry.getValue();
+        searchMap.forEach((key, checkName) -> {
             if (personName.equals(checkName)) {
                 IntStream.range(0, personCount).filter(records -> checkName.equals(arrayLists[records].get(0))).forEach(records -> {
                     System.out.println("\n");
