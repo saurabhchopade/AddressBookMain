@@ -1,15 +1,15 @@
 package com.bridgelabz.addressbookmain.controller;
 
-import com.bridgelabz.addressbookmain.model.Person;
+import com.bridgelabz.addressbookmain.service.PersonOperation;
 import com.bridgelabz.addressbookmain.util.Input;
 
-public class AddressBookMain extends Person {
+public class AddressBookMain extends PersonOperation {
 
-    public static void main(String args[]) throws Exception {
-        //Created Person Object To call Helper Functions
-        Person callFeature = new Person();
+    public static void main(String args[]) {
+        PersonOperation callFeature = new PersonOperation();
         int personCount = 0;
-        int choice = 0;
+        int choice;
+        int playMore = 1;
 
         while (true)
         {
@@ -21,16 +21,14 @@ public class AddressBookMain extends Person {
             System.out.println("5  Sorting Techniques");
             System.out.println("6  Specific City And State Person");
             System.out.println("7  Search Person in city");
-
             System.out.println("Enter Choice");
             choice = Input.getIntValue();
             switch (choice)
             {
                 case 1:
                         //inserting new record
-                        int playMore = 1;
                         ///condition to check to continue
-                        while(playMore==1)
+                        while(playMore == 1)
                         {
                             personCount = callFeature.personAdd(personCount);
                             System.out.println("DO You Want To Add More Press (1)continue | (2)Cancel");
@@ -82,7 +80,7 @@ public class AddressBookMain extends Person {
                         break;
                 case 7:
                         //search According to city
-                    personCount = callFeature.serchInCity(personCount);
+                    personCount = callFeature.searchInCity(personCount);
                     break;
                 default:
                     System.out.println("INVALID CHOICE");
