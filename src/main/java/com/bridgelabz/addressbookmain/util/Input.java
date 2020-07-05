@@ -18,7 +18,7 @@ public class Input extends PersonOperation {
         int doNotAdd = 0;
         int add = 1;
         for (int duplicatePerson = 0; duplicatePerson < personTotalCount; duplicatePerson++) {
-            if (firstN.equals(PersonOperation.dataStorage[duplicatePerson].get(0))) {
+            if (firstN.equals(PersonOperation.arrayLists[duplicatePerson].get(0))) {
                 System.out.println("Duplicates Not Allowed");
                 return doNotAdd;
             }
@@ -33,7 +33,6 @@ public class Input extends PersonOperation {
      */
     public static String getStringValue() {
         return strInput.nextLine();
-
     }
 
     /**
@@ -43,6 +42,5 @@ public class Input extends PersonOperation {
      */
     public static int getIntValue() {
         return intInput.nextInt();
-
     }
 }

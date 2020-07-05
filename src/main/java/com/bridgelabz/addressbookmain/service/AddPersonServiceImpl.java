@@ -19,7 +19,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                     }
                     if (firstName.matches("^[A-Z]{1}[a-z]{2,}$")) {
                         nextInfo++;
-                        PersonOperation.dataStorage[personCounter].add(firstName);
+                        PersonOperation.arrayLists[personCounter].add(firstName);
                         break;
                     } else {
                         System.out.println("Please Enter FirstName in Correct Format like Saurabh");
@@ -31,7 +31,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                     lastName = Input.getStringValue();
                     if (lastName.matches("^[A-Z]{1}[a-z]{2,}$")) {
                         nextInfo++;
-                        PersonOperation.dataStorage[personCounter].add(lastName);
+                        PersonOperation.arrayLists[personCounter].add(lastName);
                         break;
                     } else {
                         System.out.println("Please Enter LastName in Correct Format like Shah");
@@ -44,7 +44,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
 
                     if (address.matches("[A-Za-z-a0-9]{5,}$")) {
                         nextInfo++;
-                        PersonOperation.dataStorage[personCounter].add(address);
+                        PersonOperation.arrayLists[personCounter].add(address);
                         break;
                     } else {
                         System.out.println("Please Entered Address should be more than 5 word");
@@ -57,7 +57,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                     city = Input.getStringValue();
                     if (city.matches("^[A-Z]{1}[a-z]{2,}$")) {
                         nextInfo++;
-                        PersonOperation.dataStorage[personCounter].add(city);
+                        PersonOperation.arrayLists[personCounter].add(city);
                         break;
                     } else {
                         System.out.println("Please Enter City in Correct Format like Pune");
@@ -70,7 +70,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                     state = Input.getStringValue();
                     if (state.matches("^[A-Z]{1}[a-z]{2,}$")) {
                         nextInfo++;
-                        PersonOperation.dataStorage[personCounter].add(state);
+                        PersonOperation.arrayLists[personCounter].add(state);
                         break;
                     } else {
                         System.out.println("Please Enter State in Correct Format like Maharashtra");
@@ -83,7 +83,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                     zip = Input.getStringValue();
                     if (zip.matches("^[1-9][0-9]{5}$")) {
                         nextInfo++;
-                        PersonOperation.dataStorage[personCounter].add(zip);
+                        PersonOperation.arrayLists[personCounter].add(zip);
                         break;
                     } else {
                         System.out.println("Please Enter Zipcode in Correct Format like 9999999(6 Digit)");
@@ -96,7 +96,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                     phone = Input.getStringValue();
                     if (phone.matches("^(91)[ ][0-9]{10}$")) {
                         nextInfo++;
-                        PersonOperation.dataStorage[personCounter].add(phone);
+                        PersonOperation.arrayLists[personCounter].add(phone);
                         break;
                     } else {
                         System.out.println("Please Enter Phone in Correct Format like 91 (number)");
