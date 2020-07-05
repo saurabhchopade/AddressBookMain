@@ -7,7 +7,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
     public void addPerson(int personCounter) {
 
         int nextInfo = 1;
-        while (true) {
+        do {
             switch (nextInfo) {
                 case 1: {
                     System.out.println("Enter Name");
@@ -104,9 +104,6 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                     }
                 }
             }
-            if (nextInfo == 8) {
-                break;
-            }
-        }
+        } while (nextInfo != 8);
     }
 }
