@@ -1,13 +1,12 @@
 package com.bridgelabz.addressbookmain.controller;
 
-import com.bridgelabz.addressbookmain.model.Person;
+import com.bridgelabz.addressbookmain.service.PersonOperation;
 import com.bridgelabz.addressbookmain.util.Input;
 
-public class AddressBookMain extends Person {
+public class AddressBookMain extends PersonOperation {
 
     public static void main(String args[]) throws Exception {
-        //Created Person Object To call Helper Functions
-        Person callFeature = new Person();
+        PersonOperation callFeature = new PersonOperation();
         int personCount = 0;
         int choice = 0;
 
@@ -82,7 +81,7 @@ public class AddressBookMain extends Person {
                         break;
                 case 7:
                         //search According to city
-                    personCount = callFeature.serchInCity(personCount);
+                    personCount = callFeature.searchInCity(personCount);
                     break;
                 default:
                     System.out.println("INVALID CHOICE");

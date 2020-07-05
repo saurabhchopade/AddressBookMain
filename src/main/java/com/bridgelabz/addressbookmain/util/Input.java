@@ -1,29 +1,47 @@
 package com.bridgelabz.addressbookmain.util;
 
-import com.bridgelabz.addressbookmain.model.Person;
+import com.bridgelabz.addressbookmain.service.PersonOperation;
 
 import java.util.Scanner;
-public class Input extends Person{
+
+public class Input extends PersonOperation {
     private final static Scanner strInput = new Scanner(System.in);
     private final static Scanner intInput = new Scanner(System.in);
 
-    //To give the String Values
+    /**
+     * Check the duplicate record in the AddressBook
+     *
+     * @param firstN
+     * @return
+     */
     public int checkDuplicate(String firstN) {
         int doNotAdd = 0;
         int add = 1;
         for (int duplicatePerson = 0; duplicatePerson < personTotalCount; duplicatePerson++) {
-            if (firstN.equals(Person.dataStorage[duplicatePerson].get(0))) {
+            if (firstN.equals(PersonOperation.dataStorage[duplicatePerson].get(0))) {
                 System.out.println("Duplicates Not Allowed");
                 return doNotAdd;
             }
         }
         return add;
     }
-    public static String getStringValue(){
+
+    /**
+     * Get all string values
+     *
+     * @return
+     */
+    public static String getStringValue() {
         return strInput.nextLine();
 
     }
-    public static int getIntValue(){
+
+    /**
+     * Get all the int value
+     *
+     * @return
+     */
+    public static int getIntValue() {
         return intInput.nextInt();
 
     }

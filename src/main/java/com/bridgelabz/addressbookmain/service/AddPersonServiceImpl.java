@@ -1,10 +1,7 @@
 package com.bridgelabz.addressbookmain.service;
-
-import com.bridgelabz.addressbookmain.model.Person;
 import com.bridgelabz.addressbookmain.util.Input;
-
-public class AddPersonServiceImpl implements AddPersonService {
-    public static String firstName, lastName, address, city, state, zip, phone;
+import com.bridgelabz.addressbookmain.model.Person;
+public class AddPersonServiceImpl extends Person implements AddPersonService {
 
 
     public void addPerson(int personCounter) {
@@ -22,7 +19,7 @@ public class AddPersonServiceImpl implements AddPersonService {
                     }
                     if (firstName.matches("^[A-Z]{1}[a-z]{2,}$")) {
                         nextInfo++;
-                        Person.dataStorage[personCounter].add(firstName);
+                        PersonOperation.dataStorage[personCounter].add(firstName);
                         break;
                     } else {
                         System.out.println("Please Enter FirstName in Correct Format like Saurabh");
@@ -34,7 +31,7 @@ public class AddPersonServiceImpl implements AddPersonService {
                     lastName = Input.getStringValue();
                     if (lastName.matches("^[A-Z]{1}[a-z]{2,}$")) {
                         nextInfo++;
-                        Person.dataStorage[personCounter].add(lastName);
+                        PersonOperation.dataStorage[personCounter].add(lastName);
                         break;
                     } else {
                         System.out.println("Please Enter LastName in Correct Format like Shah");
@@ -47,7 +44,7 @@ public class AddPersonServiceImpl implements AddPersonService {
 
                     if (address.matches("[A-Za-z-a0-9]{5,}$")) {
                         nextInfo++;
-                        Person.dataStorage[personCounter].add(address);
+                        PersonOperation.dataStorage[personCounter].add(address);
                         break;
                     } else {
                         System.out.println("Please Entered Address should be more than 5 word");
@@ -60,7 +57,7 @@ public class AddPersonServiceImpl implements AddPersonService {
                     city = Input.getStringValue();
                     if (city.matches("^[A-Z]{1}[a-z]{2,}$")) {
                         nextInfo++;
-                        Person.dataStorage[personCounter].add(city);
+                        PersonOperation.dataStorage[personCounter].add(city);
                         break;
                     } else {
                         System.out.println("Please Enter City in Correct Format like Pune");
@@ -73,7 +70,7 @@ public class AddPersonServiceImpl implements AddPersonService {
                     state = Input.getStringValue();
                     if (state.matches("^[A-Z]{1}[a-z]{2,}$")) {
                         nextInfo++;
-                        Person.dataStorage[personCounter].add(state);
+                        PersonOperation.dataStorage[personCounter].add(state);
                         break;
                     } else {
                         System.out.println("Please Enter State in Correct Format like Maharashtra");
@@ -86,7 +83,7 @@ public class AddPersonServiceImpl implements AddPersonService {
                     zip = Input.getStringValue();
                     if (zip.matches("^[1-9][0-9]{5}$")) {
                         nextInfo++;
-                        Person.dataStorage[personCounter].add(zip);
+                        PersonOperation.dataStorage[personCounter].add(zip);
                         break;
                     } else {
                         System.out.println("Please Enter Zipcode in Correct Format like 9999999(6 Digit)");
@@ -99,7 +96,7 @@ public class AddPersonServiceImpl implements AddPersonService {
                     phone = Input.getStringValue();
                     if (phone.matches("^(91)[ ][0-9]{10}$")) {
                         nextInfo++;
-                        Person.dataStorage[personCounter].add(phone);
+                        PersonOperation.dataStorage[personCounter].add(phone);
                         break;
                     } else {
                         System.out.println("Please Enter Phone in Correct Format like 91 (number)");
