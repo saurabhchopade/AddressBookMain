@@ -2,10 +2,14 @@ package com.bridgelabz.addressbookmain.controller;
 
 import com.bridgelabz.addressbookmain.service.PersonOperation;
 import com.bridgelabz.addressbookmain.util.Input;
+import org.json.simple.parser.ParseException;
 
+import java.io.IOException;
 public class AddressBookMain extends PersonOperation {
+    public AddressBookMain() throws IOException, ParseException {
+    }
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException, ParseException {
         PersonOperation callFeature = new PersonOperation();
         int personCount = 0;
         int choice;

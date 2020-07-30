@@ -1,8 +1,14 @@
 package com.bridgelabz.addressbookmain.service;
-
 import com.bridgelabz.addressbookmain.model.Person;
 import com.bridgelabz.addressbookmain.util.Input;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -17,6 +23,7 @@ public class PersonOperation extends Person {
     HashMap<String, String> stateMap = new HashMap<>();
     HashMap<String, String> searchMap = new HashMap<>();
 
+
     /**
      * This function Add person To arraylist
      *
@@ -24,7 +31,7 @@ public class PersonOperation extends Person {
      * @return
      * @throws Exception
      */
-    public int personAdd(int personNum) {
+    public int personAdd(int personNum) throws IOException, ParseException {
         int personNumber = personNum;
         personTotalCount = personNum;
         arrayLists[personNumber] = new ArrayList();
@@ -33,24 +40,43 @@ public class PersonOperation extends Person {
         return personNumber;
     }
 
-    /**
-     * this will Display Entire AddressBook
-     *
-     * @param noOfRecord
-     * @return
-     * @throws Exception
-     */
+    public void displayRecord(JSONObject employee) {
+        //Get employee object within list
+        JSONObject employeeObject = (JSONObject) employee.get("personDetail");
+        String firstName = (String) employeeObject.get("firstName");
+        System.out.println(firstName);
+        String lastName = (String) employeeObject.get("lastName");
+        System.out.println(lastName);
+        String address = (String) employeeObject.get("address");
+        System.out.println(address);
+        String city = (String) employeeObject.get("city");
+        System.out.println(city);
+        String phone = (String) employeeObject.get("phone");
+        System.out.println(phone);
+        String state = (String) employeeObject.get("state");
+        System.out.println(state);
+        String zip = (String) employeeObject.get("zip");
+        System.out.println(zip);
+    }
+
     public int personDisplay(int noOfRecord) {
-        IntStream.range(0, noOfRecord).forEach(records -> {
-            System.out.println("Name:  " + arrayLists[records].get(0));
-            System.out.println("LastName:  " + arrayLists[records].get(1));
-            System.out.println("Address:  " + arrayLists[records].get(2));
-            System.out.println("City:  " + arrayLists[records].get(3));
-            System.out.println("State:  " + arrayLists[records].get(4));
-            System.out.println("Zip:  " + arrayLists[records].get(5));
-            System.out.println("Phone:  " + arrayLists[records].get(6));
-            System.out.println();
-        });
+        //JSON parser object to parse read file
+        JSONParser jsonParser = new JSONParser();
+        try (FileReader reader = new FileReader("/home/saurabh/IdeaProjects/AaddressBookMain/src/main/resources" +
+                "/PersonContact.json")) {
+            //Read JSON file
+            Object obj = jsonParser.parse(reader);
+            JSONArray employeeList = (JSONArray) obj;
+            System.out.println(employeeList);
+            //Iterate over employee array
+            employeeList.forEach(emp -> this.displayRecord((JSONObject) emp));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return noOfRecord;
     }
 

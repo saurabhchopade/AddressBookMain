@@ -1,12 +1,17 @@
 package com.bridgelabz.addressbookmain.util;
 
 import com.bridgelabz.addressbookmain.service.PersonOperation;
+import org.json.simple.parser.ParseException;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Input extends PersonOperation {
     private final static Scanner strInput = new Scanner(System.in);
     private final static Scanner intInput = new Scanner(System.in);
+
+    public Input() throws IOException, ParseException {
+    }
 
     /**
      * Check the duplicate record in the AddressBook
