@@ -34,7 +34,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                         PersonOperation.personData[personCounter].add(lastName);
                         break;
                     } else {
-                        System.out.println("Please Enter LastName in Correct Format like Shah");
+                        System.out.println("Please Enter LastName in Correct Format line Shah");
                         break;
                     }
                 }
@@ -47,7 +47,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                         PersonOperation.personData[personCounter].add(address);
                         break;
                     } else {
-                        System.out.println("Please Entered Address should be more than 5 word");
+                        System.out.println("Minimum 5 letter address allowed");
                         break;
                     }
                 }
@@ -86,7 +86,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                         PersonOperation.personData[personCounter].add(zip);
                         break;
                     } else {
-                        System.out.println("Please Enter Zipcode in Correct Format like 9999999(6 Digit)");
+                        System.out.println("Please Enter (6 Digit) Zipcode ");
                         break;
                     }
                 }

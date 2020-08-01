@@ -33,12 +33,11 @@ public class AddressBookMain extends PersonOperation {
             System.out.println("\n======= Address Book Features===========\n\n");
             System.out.println("1  ADD New Person");
             System.out.println("2  DISPLAY AddressBook Records");
-            System.out.println("3  Edit Existing Data");
-            System.out.println("4  Delete Person");
-            System.out.println("5  Sorting Techniques");
-            System.out.println("6  Specific City And State Person");
+            System.out.println("3  Modify Person information");
+            System.out.println("4  Remove Person From AddressBook");
+            System.out.println("5  Sort your Data");
+            System.out.println("6  View Specific City And State Person");
             System.out.println("7  Search Person in city");
-            System.out.println("8  Save");
             System.out.println("Enter Choice");
             choice = Input.getIntValue();
             switch (choice) {
@@ -47,6 +46,8 @@ public class AddressBookMain extends PersonOperation {
                     ///condition to check to continue
                     while (playMore == 1) {
                         personCount = callFeature.personAdd(personCount);
+                        readWrite.writeJson(JSON_PATH, personCount);
+                        readWrite.writeToCsv(CSV_PATH, personCount);
                         System.out.println("DO You Want To Add More Press (1)continue | (2)Cancel");
                         playMore = Input.getIntValue();
                     }
@@ -58,9 +59,13 @@ public class AddressBookMain extends PersonOperation {
                 case 3:
                     callFeature.personDisplay(personCount);
                     callFeature.updateRecord(personCount);
+                    readWrite.writeJson(JSON_PATH, personCount);
+                    readWrite.writeToCsv(CSV_PATH, personCount);
                     break;
                 case 4:
                     personCount = callFeature.deletePerson(personCount);
+                    readWrite.writeJson(JSON_PATH, personCount);
+                    readWrite.writeToCsv(CSV_PATH, personCount);
                     break;
                 case 5:
                     //All sorting Techniques Performed By one function
@@ -95,11 +100,6 @@ public class AddressBookMain extends PersonOperation {
                 case 7:
                     //search According to city
                     personCount = callFeature.searchInCity(personCount);
-                    break;
-                case 8:
-                    //Save Data to json
-                    readWrite.writeJson(JSON_PATH, personCount);
-                    readWrite.writeToCsv(CSV_PATH, personCount);
                     break;
                 default:
                     System.out.println("INVALID CHOICE");

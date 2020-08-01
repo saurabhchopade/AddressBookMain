@@ -1,5 +1,8 @@
 package com.bridgelabz.addressbookmain.service;
+import com.bridgelabz.addressbookmain.util.OpenCsv;
 import com.opencsv.CSVWriter;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -9,6 +12,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.stream.IntStream;
 public class ReadWriteImpl extends PersonOperation implements ReadWrite {
     public static int counter = 0;
@@ -74,6 +78,32 @@ public class ReadWriteImpl extends PersonOperation implements ReadWrite {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public int readCsv(String csvPath) {
+        try (Reader reader = Files.newBufferedReader(Paths.get(csvPath));
+             //  CSVReader csvReader = new CSVReader(reader);
+        ) {
+            CsvToBean<OpenCsv> csvToBean =
+                    new CsvToBeanBuilder(reader).withType(OpenCsv.class).withIgnoreLeadingWhiteSpace(true).build();
+            Iterator<OpenCsv> csvIterator = csvToBean.iterator();
+            while (csvIterator.hasNext()) {
+                OpenCsv openCsv = csvIterator.next();
+                personData[counter] = new ArrayList();
+                PersonOperation.personData[counter].add(openCsv.getFirstName());
+                PersonOperation.personData[counter].add(openCsv.getLastName());
+                PersonOperation.personData[counter].add(openCsv.getAddress());
+                PersonOperation.personData[counter].add(openCsv.getCity());
+                PersonOperation.personData[counter].add(openCsv.getState());
+                PersonOperation.personData[counter].add(openCsv.getZip());
+                PersonOperation.personData[counter].add(openCsv.getPhone());
+                counter++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return counter;
     }
 
     @Override
