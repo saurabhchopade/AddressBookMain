@@ -1,6 +1,6 @@
 package com.bridgelabz.addressbookmain.controller;
 import com.bridgelabz.addressbookmain.service.PersonOperation;
-import com.bridgelabz.addressbookmain.service.SimpleJsonImpl;
+import com.bridgelabz.addressbookmain.service.ReadWriteImpl;
 import com.bridgelabz.addressbookmain.util.Input;
 import org.json.simple.parser.ParseException;
 
@@ -9,9 +9,24 @@ public class AddressBookMain extends PersonOperation {
 
     public static void main(String args[]) throws IOException, ParseException {
         final String JSON_PATH = "/home/saurabh/IdeaProjects/AaddressBookMain/src/main/resources/PersonContact.json";
+        final String CSV_PATH = "/home/saurabh/IdeaProjects/AaddressBookMain/src/main/resources/CsvContact.csv";
+        int personCount = 0;
+        ReadWriteImpl readWrite = new ReadWriteImpl();
+        System.out.println("1  json Operation");
+        System.out.println("2  csv Operation");
+        System.out.println("Enter Choice");
+        int fileChoice = Input.getIntValue();
+        switch (fileChoice) {
+            case 1:
+                personCount = readWrite.readJson(JSON_PATH);
+                break;
+            case 2:
+                personCount = readWrite.readJson(JSON_PATH);
+                break;
+            default:
+                System.out.println("INVALID CHOICE");
+        }
         PersonOperation callFeature = new PersonOperation();
-        SimpleJsonImpl simpleJson = new SimpleJsonImpl();
-        int personCount = simpleJson.readJson(JSON_PATH);
         int choice;
         int playMore = 1;
         while (true) {
@@ -83,7 +98,8 @@ public class AddressBookMain extends PersonOperation {
                     break;
                 case 8:
                     //Save Data to json
-                    simpleJson.writeJson(JSON_PATH, personCount);
+                    readWrite.writeJson(JSON_PATH, personCount);
+                    readWrite.writeToCsv(CSV_PATH, personCount);
                     break;
                 default:
                     System.out.println("INVALID CHOICE");
