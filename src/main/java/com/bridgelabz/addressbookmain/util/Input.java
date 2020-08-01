@@ -23,7 +23,7 @@ public class Input extends PersonOperation {
         int doNotAdd = 0;
         int add = 1;
         for (int duplicatePerson = 0; duplicatePerson < personTotalCount; duplicatePerson++) {
-            if (firstN.equals(PersonOperation.arrayLists[duplicatePerson].get(0))) {
+            if (firstN.equals(PersonOperation.personData[duplicatePerson].get(0))) {
                 System.out.println("Duplicates Not Allowed");
                 return doNotAdd;
             }
