@@ -1,5 +1,6 @@
 package com.bridgelabz.addressbookmain.service;
 import com.bridgelabz.addressbookmain.util.OpenCsv;
+import com.google.gson.Gson;
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
@@ -21,7 +22,6 @@ public class ReadWriteImpl extends PersonOperation implements ReadWrite {
     public int readJson(String jsonPath) {
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader(jsonPath)) {
-            //Read JSON file
             Object obj = jsonParser.parse(reader);
             JSONArray personList = (JSONArray) obj;
             personList.forEach(person -> jsonToList((JSONObject) person));
@@ -122,6 +122,32 @@ public class ReadWriteImpl extends PersonOperation implements ReadWrite {
             });
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void writeToJsonUsingGson(String jsonPath, int noOfRecord) {
+        try {
+            JSONArray personList = new JSONArray();
+            IntStream.range(0, noOfRecord).forEach(records -> {
+                JSONObject personDetail = new JSONObject();
+                JSONObject personInfo = new JSONObject();
+                personDetail.put("firstName", personData[records].get(0));
+                personDetail.put("lastName", personData[records].get(1));
+                personDetail.put("address", personData[records].get(2));
+                personDetail.put("city", personData[records].get(3));
+                personDetail.put("phone", personData[records].get(4));
+                personDetail.put("state", personData[records].get(5));
+                personDetail.put("zip", personData[records].get(6));
+                personInfo.put("personDetail", personDetail);
+                personList.add(personInfo);
+            });
+            Gson gson = new Gson();
+            String json = gson.toJson(personList);
+            FileWriter writer = new FileWriter(jsonPath);
+            writer.write(json);
+            writer.close();
+        } catch (IOException e) {
         }
     }
 }

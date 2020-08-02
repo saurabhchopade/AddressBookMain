@@ -10,10 +10,12 @@ public class AddressBookMain extends PersonOperation {
     public static void main(String[] args) throws IOException, ParseException {
         final String JSON_PATH = "/home/saurabh/IdeaProjects/AaddressBookMain/src/main/resources/PersonContact.json";
         final String CSV_PATH = "/home/saurabh/IdeaProjects/AaddressBookMain/src/main/resources/CsvContact.csv";
+        final String GSON_JSON_PATH = "/home/saurabh/IdeaProjects/AaddressBookMain/src/main/resources/GsonJson.json";
         int personCount = 0;
         ReadWriteImpl readWrite = new ReadWriteImpl();
         System.out.println("1  json Operation");
         System.out.println("2  csv Operation");
+        System.out.println("3  gson Operation");
         System.out.println("Enter Choice");
         int fileChoice = Input.getIntValue();
         switch (fileChoice) {
@@ -22,6 +24,9 @@ public class AddressBookMain extends PersonOperation {
                 break;
             case 2:
                 personCount = readWrite.readCsv(CSV_PATH);
+                break;
+            case 3:
+                personCount = readWrite.readJson(GSON_JSON_PATH);
                 break;
             default:
                 System.out.println("INVALID CHOICE");
@@ -47,6 +52,7 @@ public class AddressBookMain extends PersonOperation {
                         personCount = callFeature.personAdd(personCount);
                         readWrite.writeJson(JSON_PATH, personCount);
                         readWrite.writeToCsv(CSV_PATH, personCount);
+                        readWrite.writeToJsonUsingGson(GSON_JSON_PATH, personCount);
                         System.out.println("DO You Want To Add More Press (1)continue | (2)Cancel");
                         playMore = Input.getIntValue();
                     }
@@ -59,11 +65,13 @@ public class AddressBookMain extends PersonOperation {
                     callFeature.updateRecord(personCount);
                     readWrite.writeJson(JSON_PATH, personCount);
                     readWrite.writeToCsv(CSV_PATH, personCount);
+                    readWrite.writeToJsonUsingGson(GSON_JSON_PATH, personCount);
                     break;
                 case 4:
                     personCount = callFeature.deletePerson(personCount);
                     readWrite.writeJson(JSON_PATH, personCount);
                     readWrite.writeToCsv(CSV_PATH, personCount);
+                    readWrite.writeToJsonUsingGson(GSON_JSON_PATH, personCount);
                     break;
                 case 5:
                     int sortChoice;
