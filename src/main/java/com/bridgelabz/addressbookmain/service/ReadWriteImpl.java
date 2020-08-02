@@ -1,16 +1,20 @@
 package com.bridgelabz.addressbookmain.service;
+import com.bridgelabz.addressbookmain.util.OpenCsv;
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.CsvToBean;
+import com.opencsv.bean.CsvToBeanBuilder;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.stream.IntStream;
-public class SimpleJsonImpl extends PersonOperation implements ReadWrite {
+public class ReadWriteImpl extends PersonOperation implements ReadWrite {
     public static int counter = 0;
 
     @Override
@@ -20,7 +24,6 @@ public class SimpleJsonImpl extends PersonOperation implements ReadWrite {
             //Read JSON file
             Object obj = jsonParser.parse(reader);
             JSONArray personList = (JSONArray) obj;
-            System.out.println(personList);
             personList.forEach(person -> jsonToList((JSONObject) person));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -71,6 +74,52 @@ public class SimpleJsonImpl extends PersonOperation implements ReadWrite {
         try (FileWriter file = new FileWriter(jsonPath)) {
             file.write(personList.toJSONString());
             file.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public int readCsv(String csvPath) {
+        int firstRowIgnore = 0;
+        try (Reader reader = Files.newBufferedReader(Paths.get(csvPath))) {
+            CsvToBean<OpenCsv> csvToBean =
+                    new CsvToBeanBuilder(reader).withType(OpenCsv.class).withIgnoreLeadingWhiteSpace(true).build();
+            Iterator<OpenCsv> csvIterator = csvToBean.iterator();
+            while (csvIterator.hasNext()) {
+                OpenCsv openCsv = csvIterator.next();
+                if (firstRowIgnore == 0) {
+                    firstRowIgnore++;
+                    continue;
+                }
+                personData[counter] = new ArrayList();
+                PersonOperation.personData[counter].add(openCsv.getFirstName());
+                PersonOperation.personData[counter].add(openCsv.getLastName());
+                PersonOperation.personData[counter].add(openCsv.getAddress());
+                PersonOperation.personData[counter].add(openCsv.getCity());
+                PersonOperation.personData[counter].add(openCsv.getState());
+                PersonOperation.personData[counter].add(openCsv.getZip());
+                PersonOperation.personData[counter].add(openCsv.getPhone());
+                counter++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return counter;
+    }
+
+    @Override
+    public void writeToCsv(String csvPath, int noOfRecord) {
+        try (Writer writer = Files.newBufferedWriter(Paths.get(csvPath)); CSVWriter csvWriter = new CSVWriter(writer,
+                CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                CSVWriter.DEFAULT_LINE_END);) {
+            String[] columnName = {"firstName", "lastName", "address", "city", "state", "zip", "phone"};
+            csvWriter.writeNext(columnName);
+            IntStream.range(0, noOfRecord).forEach(records -> {
+                csvWriter.writeNext(new String[]{personData[records].get(0), personData[records].get(1),
+                        personData[records].get(2), personData[records].get(3), personData[records].get(4),
+                        personData[records].get(5), personData[records].get(6)});
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
