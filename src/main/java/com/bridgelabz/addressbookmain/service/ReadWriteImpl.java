@@ -24,7 +24,6 @@ public class ReadWriteImpl extends PersonOperation implements ReadWrite {
             //Read JSON file
             Object obj = jsonParser.parse(reader);
             JSONArray personList = (JSONArray) obj;
-            System.out.println(personList);
             personList.forEach(person -> jsonToList((JSONObject) person));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -82,14 +81,17 @@ public class ReadWriteImpl extends PersonOperation implements ReadWrite {
 
     @Override
     public int readCsv(String csvPath) {
-        try (Reader reader = Files.newBufferedReader(Paths.get(csvPath));
-             //  CSVReader csvReader = new CSVReader(reader);
-        ) {
+        int firstRowIgnore = 0;
+        try (Reader reader = Files.newBufferedReader(Paths.get(csvPath))) {
             CsvToBean<OpenCsv> csvToBean =
                     new CsvToBeanBuilder(reader).withType(OpenCsv.class).withIgnoreLeadingWhiteSpace(true).build();
             Iterator<OpenCsv> csvIterator = csvToBean.iterator();
             while (csvIterator.hasNext()) {
                 OpenCsv openCsv = csvIterator.next();
+                if (firstRowIgnore == 0) {
+                    firstRowIgnore++;
+                    continue;
+                }
                 personData[counter] = new ArrayList();
                 PersonOperation.personData[counter].add(openCsv.getFirstName());
                 PersonOperation.personData[counter].add(openCsv.getLastName());

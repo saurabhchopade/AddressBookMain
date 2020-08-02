@@ -7,7 +7,7 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 public class AddressBookMain extends PersonOperation {
 
-    public static void main(String args[]) throws IOException, ParseException {
+    public static void main(String[] args) throws IOException, ParseException {
         final String JSON_PATH = "/home/saurabh/IdeaProjects/AaddressBookMain/src/main/resources/PersonContact.json";
         final String CSV_PATH = "/home/saurabh/IdeaProjects/AaddressBookMain/src/main/resources/CsvContact.csv";
         int personCount = 0;
@@ -21,7 +21,7 @@ public class AddressBookMain extends PersonOperation {
                 personCount = readWrite.readJson(JSON_PATH);
                 break;
             case 2:
-                personCount = readWrite.readJson(JSON_PATH);
+                personCount = readWrite.readCsv(CSV_PATH);
                 break;
             default:
                 System.out.println("INVALID CHOICE");
@@ -38,12 +38,11 @@ public class AddressBookMain extends PersonOperation {
             System.out.println("5  Sort your Data");
             System.out.println("6  View Specific City And State Person");
             System.out.println("7  Search Person in city");
+            System.out.println("8  EXIT");
             System.out.println("Enter Choice");
             choice = Input.getIntValue();
             switch (choice) {
                 case 1:
-                    //inserting new record
-                    ///condition to check to continue
                     while (playMore == 1) {
                         personCount = callFeature.personAdd(personCount);
                         readWrite.writeJson(JSON_PATH, personCount);
@@ -53,7 +52,6 @@ public class AddressBookMain extends PersonOperation {
                     }
                     break;
                 case 2:
-                    //Displaying all records
                     callFeature.personDisplay(personCount);
                     break;
                 case 3:
@@ -68,7 +66,6 @@ public class AddressBookMain extends PersonOperation {
                     readWrite.writeToCsv(CSV_PATH, personCount);
                     break;
                 case 5:
-                    //All sorting Techniques Performed By one function
                     int sortChoice;
                     System.out.println("===SELECT SORTING TECHNIQUE");
                     System.out.println("1) By Name");
@@ -94,13 +91,13 @@ public class AddressBookMain extends PersonOperation {
                     }
                     break;
                 case 6:
-                    //for specific city and state
                     personCount = callFeature.viewPersonByCityState(personCount);
                     break;
                 case 7:
-                    //search According to city
                     personCount = callFeature.searchInCity(personCount);
                     break;
+                case 8:
+                    System.exit(0);
                 default:
                     System.out.println("INVALID CHOICE");
             }

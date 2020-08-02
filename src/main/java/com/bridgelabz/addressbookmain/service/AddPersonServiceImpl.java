@@ -22,7 +22,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                         PersonOperation.personData[personCounter].add(firstName);
                         break;
                     } else {
-                        System.out.println("Please Enter FirstName in Correct Format like Saurabh");
+                        System.out.println("Please Enter FirstName in Correct Format");
                         break;
                     }
                 }
@@ -34,7 +34,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                         PersonOperation.personData[personCounter].add(lastName);
                         break;
                     } else {
-                        System.out.println("Please Enter LastName in Correct Format line Shah");
+                        System.out.println("Please Enter LastName in Correct Format");
                         break;
                     }
                 }
@@ -47,7 +47,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                         PersonOperation.personData[personCounter].add(address);
                         break;
                     } else {
-                        System.out.println("Minimum 5 letter address allowed");
+                        System.out.println("Minimum 5 letters address allowed");
                         break;
                     }
                 }
@@ -60,7 +60,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                         PersonOperation.personData[personCounter].add(city);
                         break;
                     } else {
-                        System.out.println("Please Enter City in Correct Format like Pune");
+                        System.out.println("Please Enter City in Correct Format");
                         break;
                     }
                 }
@@ -73,7 +73,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                         PersonOperation.personData[personCounter].add(state);
                         break;
                     } else {
-                        System.out.println("Please Enter State in Correct Format like Maharashtra");
+                        System.out.println("Please Enter State in Correct Format");
                         break;
                     }
                 }
@@ -99,7 +99,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                         PersonOperation.personData[personCounter].add(phone);
                         break;
                     } else {
-                        System.out.println("Please Enter Phone in Correct Format like 91 (number)");
+                        System.out.println("Please Enter Valid Phone Number");
                         break;
                     }
                 }
