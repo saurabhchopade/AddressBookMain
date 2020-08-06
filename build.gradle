@@ -15,4 +15,9 @@ dependencies {
     compile 'org.json:json:20171018'
     compile "com.opencsv:opencsv:4.0"
     compile 'com.google.code.gson:gson:2.2.+'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
+}
+dependencies {
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+    testImplementation "io.rest-assured:rest-assured:4.1.2"
 }
