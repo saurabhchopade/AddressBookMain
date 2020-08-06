@@ -1,4 +1,5 @@
 package com.bridgelabz.addressbookmain.service;
+import com.bridgelabz.addressbookmain.dbconnection.DbConnection;
 import com.bridgelabz.addressbookmain.util.OpenCsv;
 import com.google.gson.Gson;
 import com.opencsv.CSVWriter;
@@ -12,9 +13,14 @@ import org.json.simple.parser.ParseException;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.stream.IntStream;
+
+import static com.bridgelabz.addressbookmain.dbconnection.DbConnection.makeConnection;
 public class ReadWriteImpl extends PersonOperation implements ReadWrite {
     public static int counter = 0;
 
@@ -149,5 +155,36 @@ public class ReadWriteImpl extends PersonOperation implements ReadWrite {
             writer.close();
         } catch (IOException e) {
         }
+    }
+
+    @Override
+    public int readDatabase() {
+        makeConnection();
+        Statement statement = null;
+        try {
+            ResultSet resultSet;
+            statement = DbConnection.myConn.createStatement();
+            resultSet = statement.executeQuery("select * from person_detail");
+            while (resultSet.next()) {
+                personData[counter] = new ArrayList();
+                PersonOperation.personData[counter].add(resultSet.getString(1));
+                PersonOperation.personData[counter].add(resultSet.getString(2));
+                PersonOperation.personData[counter].add(resultSet.getString(3));
+                PersonOperation.personData[counter].add(resultSet.getString(4));
+                PersonOperation.personData[counter].add(resultSet.getString(5));
+                PersonOperation.personData[counter].add(resultSet.getString(6));
+                PersonOperation.personData[counter].add(resultSet.getString(7));
+                counter++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                DbConnection.myConn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return counter;
     }
 }

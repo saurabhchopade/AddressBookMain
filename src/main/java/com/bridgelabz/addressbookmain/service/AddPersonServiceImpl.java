@@ -1,5 +1,6 @@
 package com.bridgelabz.addressbookmain.service;
 import com.bridgelabz.addressbookmain.model.Person;
+import com.bridgelabz.addressbookmain.util.DbOperations;
 import com.bridgelabz.addressbookmain.util.Input;
 import org.json.simple.parser.ParseException;
 
@@ -7,6 +8,7 @@ import java.io.IOException;
 public class AddPersonServiceImpl extends Person implements AddPersonService {
     public void addPerson(int personCounter) throws IOException, ParseException {
         int nextInfo = 1;
+        Person person=new Person();
         do {
             switch (nextInfo) {
                 case 1: {
@@ -20,6 +22,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                     if (firstName.matches("^[A-Z]{1}[a-z]{2,}$")) {
                         nextInfo++;
                         PersonOperation.personData[personCounter].add(firstName);
+                        person.setFirstName(firstName);
                         break;
                     } else {
                         System.out.println("Please Enter FirstName in Correct Format");
@@ -32,6 +35,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                     if (lastName.matches("^[A-Z]{1}[a-z]{2,}$")) {
                         nextInfo++;
                         PersonOperation.personData[personCounter].add(lastName);
+                        person.setLastName(lastName);
                         break;
                     } else {
                         System.out.println("Please Enter LastName in Correct Format");
@@ -45,6 +49,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                     if (address.matches("[A-Za-z-a0-9]{5,}$")) {
                         nextInfo++;
                         PersonOperation.personData[personCounter].add(address);
+                        person.setAddress(address);
                         break;
                     } else {
                         System.out.println("Minimum 5 letters address allowed");
@@ -58,6 +63,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                     if (city.matches("^[A-Z]{1}[a-z]{2,}$")) {
                         nextInfo++;
                         PersonOperation.personData[personCounter].add(city);
+                        person.setCity(city);
                         break;
                     } else {
                         System.out.println("Please Enter City in Correct Format");
@@ -71,6 +77,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                     if (state.matches("^[A-Z]{1}[a-z]{2,}$")) {
                         nextInfo++;
                         PersonOperation.personData[personCounter].add(state);
+                        person.setState(state);
                         break;
                     } else {
                         System.out.println("Please Enter State in Correct Format");
@@ -84,6 +91,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                     if (zip.matches("^[1-9][0-9]{5}$")) {
                         nextInfo++;
                         PersonOperation.personData[personCounter].add(zip);
+                        person.setZip(zip);
                         break;
                     } else {
                         System.out.println("Please Enter (6 Digit) Zipcode ");
@@ -97,6 +105,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                     if (phone.matches("^(91)[ ][0-9]{10}$")) {
                         nextInfo++;
                         PersonOperation.personData[personCounter].add(phone);
+                        person.setPhone(phone);
                         break;
                     } else {
                         System.out.println("Please Enter Valid Phone Number");
@@ -105,5 +114,7 @@ public class AddPersonServiceImpl extends Person implements AddPersonService {
                 }
             }
         } while (nextInfo != 8);
+        DbOperations dbOperations=new DbOperations();
+        dbOperations.addRecord(person);
     }
 }

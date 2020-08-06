@@ -5,4 +5,5 @@ public interface ReadWrite {
     int  readCsv(String csvPath);
     void writeToCsv(String csvPath, int noOfRecord);
     void writeToJsonUsingGson(String csvPath, int noOfRecord);
+    int readDatabase();
 }

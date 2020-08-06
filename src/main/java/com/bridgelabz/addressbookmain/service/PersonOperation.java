@@ -1,5 +1,6 @@
 package com.bridgelabz.addressbookmain.service;
 import com.bridgelabz.addressbookmain.model.Person;
+import com.bridgelabz.addressbookmain.util.DbOperations;
 import com.bridgelabz.addressbookmain.util.Input;
 import org.json.simple.parser.ParseException;
 
@@ -43,6 +44,8 @@ public class PersonOperation extends Person {
             System.out.println("Phone:  " + personData[records].get(6));
             System.out.println();
         });
+        DbOperations dbOperations = new DbOperations();
+        dbOperations.displayRecords();
         return noOfRecord;
     }
 
@@ -56,32 +59,68 @@ public class PersonOperation extends Person {
         String dummyName;
         System.out.println("Enter Person name to Edit Info=");
         dummyName = Input.getStringValue();
+        DbOperations dbOperations = new DbOperations();
         IntStream.range(0, personCount).forEach(records -> {
             if (dummyName.equals(personData[records].get(0))) {
+                String check;
+                int option;
                 System.out.println("Record Found");
-                System.out.println("Enter LastName: ");
                 firstName = dummyName;
                 personData[records].set(0, firstName);
-                System.out.println("Enter LastName: ");
-                lastName = Input.getStringValue();
-                personData[records].set(1, lastName);
-                System.out.println("Enter Address: ");
-                address = Input.getStringValue();
-                personData[records].set(2, address);
-                System.out.println("Enter city: ");
-                city = Input.getStringValue();
-                personData[records].set(3, city);
-                System.out.println("Enter state: ");
-                state = Input.getStringValue();
-                personData[records].set(4, state);
-                System.out.println("Enter zip: ");
-                zip = Input.getStringValue();
-                personData[records].set(5, zip);
-                System.out.println("Enter Phone: ");
-                phone = Input.getStringValue();
-                personData[records].set(6, phone);
+                do {
+                    System.out.println("Select Option To Modify");
+                    System.out.println("1 Lastname");
+                    System.out.println("2 Address");
+                    System.out.println("3 City");
+                    System.out.println("4 State");
+                    System.out.println("5 Zip");
+                    System.out.println("6 Mobile Number");
+                    option = Input.getIntValue();
+                    switch (option) {
+                        case 1:
+                            System.out.println("Enter LastName: ");
+                            lastName = Input.getStringValue();
+                            personData[records].set(1, lastName);
+                            dbOperations.updateRecord(option, dummyName, lastName);
+                            break;
+                        case 2:
+                            System.out.println("Enter Address: ");
+                            address = Input.getStringValue();
+                            personData[records].set(2, address);
+                            dbOperations.updateRecord(option, dummyName, address);
+                            break;
+                        case 3:
+                            System.out.println("Enter city: ");
+                            city = Input.getStringValue();
+                            personData[records].set(3, city);
+                            dbOperations.updateRecord(option, dummyName, city);
+                            break;
+                        case 4:
+                            System.out.println("Enter state: ");
+                            state = Input.getStringValue();
+                            personData[records].set(4, state);
+                            dbOperations.updateRecord(option, dummyName, state);
+                            break;
+                        case 5:
+                            System.out.println("Enter zip: ");
+                            zip = Input.getStringValue();
+                            personData[records].set(5, zip);
+                            dbOperations.updateRecord(option, dummyName, zip);
+                            break;
+                        case 6:
+                            System.out.println("Enter Phone: ");
+                            phone = Input.getStringValue();
+                            personData[records].set(6, phone);
+                            dbOperations.updateRecord(option, dummyName, phone);
+                            break;
+                        default:
+                            System.out.println("Enter Valid Option");
+                            break;
+                    }
+                    System.out.println("Do you want to continue press y");
+                    check = Input.getStringValue();
+                } while (check.equals("y"));
             } else {
-//                System.out.println("Record Not Found");
             }
         });
         return personCount;
@@ -98,6 +137,8 @@ public class PersonOperation extends Person {
         String dummyName;
         System.out.println("Enter Person Name To remove");
         dummyName = Input.getStringValue();
+        DbOperations dbOperations = new DbOperations();
+        dbOperations.DeleteRecord(dummyName);
         IntStream.range(0, recordsInList).filter(records -> dummyName.equals(personData[records].get(0))).forEach(records -> personData[records].clear());
         return recordsInList - 1;
     }

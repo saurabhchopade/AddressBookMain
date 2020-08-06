@@ -16,6 +16,7 @@ public class AddressBookMain extends PersonOperation {
         System.out.println("1  json Operation");
         System.out.println("2  csv Operation");
         System.out.println("3  gson Operation");
+        System.out.println("4  database Operation");
         System.out.println("Enter Choice");
         int fileChoice = Input.getIntValue();
         switch (fileChoice) {
@@ -27,6 +28,9 @@ public class AddressBookMain extends PersonOperation {
                 break;
             case 3:
                 personCount = readWrite.readJson(GSON_JSON_PATH);
+                break;
+            case 4:
+                personCount = readWrite.readDatabase();
                 break;
             default:
                 System.out.println("INVALID CHOICE");
@@ -43,16 +47,14 @@ public class AddressBookMain extends PersonOperation {
             System.out.println("5  Sort your Data");
             System.out.println("6  View Specific City And State Person");
             System.out.println("7  Search Person in city");
-            System.out.println("8  EXIT");
+            System.out.println("8  save All details");
+            System.out.println("9  EXIT");
             System.out.println("Enter Choice");
             choice = Input.getIntValue();
             switch (choice) {
                 case 1:
                     while (playMore == 1) {
                         personCount = callFeature.personAdd(personCount);
-                        readWrite.writeJson(JSON_PATH, personCount);
-                        readWrite.writeToCsv(CSV_PATH, personCount);
-                        readWrite.writeToJsonUsingGson(GSON_JSON_PATH, personCount);
                         System.out.println("DO You Want To Add More Press (1)continue | (2)Cancel");
                         playMore = Input.getIntValue();
                     }
@@ -63,15 +65,9 @@ public class AddressBookMain extends PersonOperation {
                 case 3:
                     callFeature.personDisplay(personCount);
                     callFeature.updateRecord(personCount);
-                    readWrite.writeJson(JSON_PATH, personCount);
-                    readWrite.writeToCsv(CSV_PATH, personCount);
-                    readWrite.writeToJsonUsingGson(GSON_JSON_PATH, personCount);
                     break;
                 case 4:
                     personCount = callFeature.deletePerson(personCount);
-                    readWrite.writeJson(JSON_PATH, personCount);
-                    readWrite.writeToCsv(CSV_PATH, personCount);
-                    readWrite.writeToJsonUsingGson(GSON_JSON_PATH, personCount);
                     break;
                 case 5:
                     int sortChoice;
@@ -105,6 +101,11 @@ public class AddressBookMain extends PersonOperation {
                     personCount = callFeature.searchInCity(personCount);
                     break;
                 case 8:
+                    readWrite.writeJson(JSON_PATH, personCount);
+                    readWrite.writeToCsv(CSV_PATH, personCount);
+                    readWrite.writeToJsonUsingGson(GSON_JSON_PATH, personCount);
+                    break;
+                case 9:
                     System.exit(0);
                 default:
                     System.out.println("INVALID CHOICE");
